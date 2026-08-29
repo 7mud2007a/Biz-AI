@@ -2,171 +2,306 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BizAI — مساعد أعمالك الذكي</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>BizAI</title>
 
 <style>
-*{box-sizing:border-box}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+:root{
+    --bg:#050507;
+    --glass:rgba(255,255,255,.065);
+    --glass-strong:rgba(255,255,255,.095);
+    --border:rgba(255,255,255,.11);
+    --text:#f5f5f7;
+    --muted:#92929a;
+    --purple:#9b6cff;
+    --purple2:#6f42d8;
+}
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     margin:0;
-    font-family:Arial,sans-serif;
-    background:#07070b;
-    color:#fff;
+    min-height:100vh;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 50% -10%,#39206d 0,transparent 35%),
+        radial-gradient(circle at 100% 40%,#1a1232 0,transparent 25%),
+        var(--bg);
+    font-family:
+        "SF Pro Display",
+        "SF Pro Text",
+        "SF Arabic",
+        "Noto Sans Arabic",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    overflow-x:hidden;
+}
+
+/* خلفية ضبابية */
+body::before{
+    content:"";
+    position:fixed;
+    width:280px;
+    height:280px;
+    top:20%;
+    left:-120px;
+    background:#8b5cf6;
+    filter:blur(130px);
+    opacity:.12;
+    pointer-events:none;
 }
 
 .container{
-    width:92%;
-    max-width:1100px;
+    width:min(92%,1080px);
     margin:auto;
 }
 
+/* NAV */
 nav{
+    height:82px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    padding:22px 0;
+    justify-content:space-between;
 }
 
 .logo{
     font-size:25px;
-    font-weight:bold;
+    font-weight:700;
+    letter-spacing:-1px;
 }
 
 .logo span{
-    color:#9b5cff;
+    color:#a77aff;
+}
+
+.nav-btn,
+.main-btn{
+    border:1px solid rgba(255,255,255,.14);
+    color:white;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.14),
+            rgba(255,255,255,.055)
+        );
+    backdrop-filter:blur(22px) saturate(150%);
+    -webkit-backdrop-filter:blur(22px) saturate(150%);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 8px 30px rgba(0,0,0,.25);
+    cursor:pointer;
 }
 
 .nav-btn{
-    background:#9b5cff;
-    border:0;
-    color:white;
-    padding:11px 18px;
-    border-radius:12px;
-    font-weight:bold;
+    padding:10px 17px;
+    border-radius:14px;
+    font-size:14px;
 }
 
+/* HERO */
 .hero{
     text-align:center;
-    padding:65px 0 45px;
+    padding:75px 0 60px;
 }
 
 .badge{
-    display:inline-block;
-    background:#15101f;
-    color:#b98aff;
-    border:1px solid #34204e;
-    padding:8px 14px;
-    border-radius:30px;
+    display:inline-flex;
+    align-items:center;
+    padding:9px 15px;
+    border-radius:100px;
+    color:#c4a8ff;
     font-size:13px;
-    margin-bottom:20px;
+    background:rgba(155,108,255,.09);
+    border:1px solid rgba(155,108,255,.2);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
 }
 
 h1{
-    font-size:clamp(38px,8vw,70px);
-    margin:0 auto 20px;
+    margin:22px auto 18px;
     max-width:800px;
+    font-size:clamp(43px,8vw,74px);
     line-height:1.05;
+    letter-spacing:-3px;
+    font-weight:700;
 }
 
 .gradient{
-    background:linear-gradient(90deg,#fff,#a86cff);
+    background:linear-gradient(
+        110deg,
+        #ffffff 10%,
+        #d4c0ff 45%,
+        #9866ff 90%
+    );
     -webkit-background-clip:text;
+    background-clip:text;
     color:transparent;
 }
 
 .hero p{
-    color:#999;
-    max-width:600px;
+    max-width:620px;
     margin:auto;
-    line-height:1.8;
+    color:var(--muted);
     font-size:16px;
+    line-height:1.8;
 }
 
 .main-btn{
-    margin-top:28px;
-    background:#9b5cff;
-    color:white;
-    border:0;
-    padding:15px 28px;
-    border-radius:14px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 0 35px #7d3cff33;
+    margin-top:30px;
+    padding:15px 27px;
+    border-radius:17px;
+    font-size:15px;
+    font-weight:600;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(174,139,255,.55),
+            rgba(103,57,190,.38)
+        );
 }
 
+/* SECTIONS */
 .section-title{
     text-align:center;
-    margin:55px 0 25px;
+    margin:45px 0 25px;
 }
 
 .section-title h2{
-    margin-bottom:8px;
+    margin:0 0 8px;
+    font-size:27px;
+    letter-spacing:-1px;
 }
 
 .section-title p{
-    color:#777;
+    margin:0;
+    color:#777780;
 }
 
+/* CARDS */
 .features{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
 }
 
 .card{
-    background:#0d0d13;
-    border:1px solid #1b1b25;
-    border-radius:18px;
-    padding:23px;
-    transition:.2s;
+    min-height:190px;
+    padding:24px;
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.095),
+            rgba(255,255,255,.035)
+        );
+
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(28px) saturate(150%);
+    -webkit-backdrop-filter:blur(28px) saturate(150%);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.10),
+        0 18px 50px rgba(0,0,0,.20);
+
+    transition:.25s ease;
 }
 
 .card:hover{
-    border-color:#713dcc;
-    transform:translateY(-3px);
+    transform:translateY(-4px);
+    border-color:rgba(167,122,255,.35);
 }
 
 .icon{
-    width:45px;
-    height:45px;
+    width:43px;
+    height:43px;
+    border-radius:14px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:12px;
-    background:#171020;
-    font-size:22px;
-    margin-bottom:18px;
+
+    background:rgba(155,108,255,.10);
+    border:1px solid rgba(155,108,255,.18);
+
+    margin-bottom:20px;
+}
+
+.icon::after{
+    content:"";
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#a77aff;
+    box-shadow:0 0 18px #9b6cff;
 }
 
 .card h3{
-    margin:0 0 10px;
+    margin:0 0 9px;
+    font-size:17px;
 }
 
 .card p{
-    color:#888;
+    margin:0;
+    color:#888891;
     line-height:1.7;
     font-size:14px;
 }
 
+/* DASHBOARD */
 .dashboard{
-    margin:60px auto;
-    background:#0c0c12;
-    border:1px solid #20202b;
-    border-radius:24px;
-    padding:22px;
+    margin:70px 0 40px;
+    padding:23px;
+    border-radius:29px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.085),
+            rgba(255,255,255,.035)
+        );
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(30px) saturate(150%);
+    -webkit-backdrop-filter:blur(30px) saturate(150%);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.10),
+        0 25px 70px rgba(0,0,0,.28);
 }
 
 .dashboard-top{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
     margin-bottom:20px;
 }
 
+.dashboard-top h2{
+    margin:0;
+    font-size:22px;
+}
+
+.dashboard-top small{
+    color:#777780;
+}
+
 .status{
-    color:#9b5cff;
+    color:#9f79ff;
     font-size:13px;
 }
 
@@ -177,33 +312,90 @@ h1{
 }
 
 .tool{
-    background:#12121a;
-    border:1px solid #20202b;
-    padding:18px;
-    border-radius:15px;
+    padding:19px;
+    border-radius:19px;
+
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.075);
+
+    transition:.2s;
+}
+
+.tool:hover{
+    background:rgba(255,255,255,.075);
 }
 
 .tool strong{
     display:block;
     margin-bottom:7px;
+    font-size:15px;
 }
 
 .tool span{
-    color:#777;
+    color:#777780;
     font-size:13px;
 }
 
+/* FOOTER */
 footer{
+    padding:35px 0 45px;
     text-align:center;
-    color:#555;
-    padding:35px 0;
-    font-size:13px;
+    color:#55555d;
+    font-size:12px;
 }
 
-@media(max-width:600px){
-    .hero{padding-top:40px}
-    .tools{grid-template-columns:1fr}
-    h1{font-size:42px}
+/* MOBILE */
+@media(max-width:700px){
+
+    .container{
+        width:90%;
+    }
+
+    nav{
+        height:72px;
+    }
+
+    .hero{
+        padding:55px 0 45px;
+    }
+
+    h1{
+        font-size:45px;
+        letter-spacing:-2.5px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        min-height:auto;
+        padding:22px;
+    }
+
+    .tools{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard{
+        padding:18px;
+        border-radius:25px;
+    }
+}
+
+@media(prefers-reduced-motion:no-preference){
+    .card,
+    .tool,
+    button{
+        transition:
+            transform .25s ease,
+            background .25s ease,
+            border-color .25s ease;
+    }
 }
 </style>
 </head>
@@ -219,65 +411,83 @@ footer{
 
 <section class="hero">
 
-    <div class="badge">✦ مساعدك الذكي للأعمال</div>
+    <div class="badge">مساعد الأعمال الذكي</div>
 
     <h1>
-        حوّل فكرتك إلى
-        <span class="gradient">مشروع أقوى</span>
+        ابنِ مشروعك
+        <span class="gradient">بذكاء</span>
     </h1>
 
     <p>
-        أدوات ذكية تساعدك على التسويق، صناعة المحتوى،
-        تحليل حساباتك، وبناء حضور احترافي لمشروعك.
+        أدوات ذكية تساعدك على بناء علامتك التجارية،
+        صناعة المحتوى، وتحسين حضورك الرقمي من مكان واحد.
     </p>
 
     <button class="main-btn" onclick="start()">
-        ابدأ مشروعك مجاناً →
+        ابدأ مجاناً
     </button>
 
 </section>
 
 <div class="section-title">
-    <h2>كل أدوات مشروعك بمكان واحد</h2>
-    <p>بدون تعقيد، وبدون عشرات المواقع.</p>
+    <h2>كل أدوات مشروعك</h2>
+    <p>بسيطة، سريعة، ومصممة لتشتغل معك.</p>
 </div>
 
 <section class="features">
 
     <div class="card">
-        <div class="icon">🤖</div>
-        <h3>مولّد المحتوى</h3>
-        <p>أنشئ منشورات، أفكار Reels، إعلانات وكتابات تسويقية.</p>
+        <div class="icon"></div>
+        <h3>صناعة المحتوى</h3>
+        <p>
+            أنشئ منشورات وأفكار فيديوهات وإعلانات
+            تناسب مشروعك.
+        </p>
     </div>
 
     <div class="card">
-        <div class="icon">📊</div>
+        <div class="icon"></div>
         <h3>تحليل الحساب</h3>
-        <p>حلّل حضورك على السوشيال ميديا واكتشف نقاط الضعف.</p>
+        <p>
+            اكتشف نقاط القوة والضعف في حضورك
+            على منصات التواصل.
+        </p>
     </div>
 
     <div class="card">
-        <div class="icon">🎨</div>
-        <h3>هوية مشروعك</h3>
-        <p>اقتراح أسماء، ألوان، Bio وهوية بصرية لمشروعك.</p>
+        <div class="icon"></div>
+        <h3>هوية العلامة</h3>
+        <p>
+            أنشئ هوية متناسقة من الاسم إلى الألوان
+            والوصف.
+        </p>
     </div>
 
     <div class="card">
-        <div class="icon">🌐</div>
+        <div class="icon"></div>
         <h3>صفحة مشروع</h3>
-        <p>أنشئ صفحة احترافية لمشروعك خلال دقائق.</p>
+        <p>
+            أنشئ صفحة تعريف احترافية لمشروعك
+            خلال دقائق.
+        </p>
     </div>
 
     <div class="card">
-        <div class="icon">📅</div>
+        <div class="icon"></div>
         <h3>خطة محتوى</h3>
-        <p>احصل على خطة نشر منظمة لأيام وأسابيع قادمة.</p>
+        <p>
+            احصل على خطة نشر منظمة تساعدك
+            على الاستمرار.
+        </p>
     </div>
 
     <div class="card">
-        <div class="icon">💡</div>
+        <div class="icon"></div>
         <h3>أفكار تسويقية</h3>
-        <p>احصل على أفكار جديدة تساعدك في جذب العملاء.</p>
+        <p>
+            اكتشف طرقاً جديدة لجذب العملاء
+            وتنمية مشروعك.
+        </p>
     </div>
 
 </section>
@@ -286,33 +496,33 @@ footer{
 
     <div class="dashboard-top">
         <div>
-            <h2 style="margin:0">لوحة التحكم</h2>
-            <small style="color:#777">مشروعك في مكان واحد</small>
+            <h2>لوحة التحكم</h2>
+            <small>مساحة عملك</small>
         </div>
 
-        <div class="status">● جاهز</div>
+        <div class="status">جاهز</div>
     </div>
 
     <div class="tools">
 
         <div class="tool">
-            <strong>🤖 إنشاء محتوى</strong>
+            <strong>إنشاء محتوى</strong>
             <span>منشورات وإعلانات وأفكار</span>
         </div>
 
         <div class="tool">
-            <strong>📊 تحليل الحساب</strong>
+            <strong>تحليل الحساب</strong>
             <span>تحليل الأداء والمنافسين</span>
         </div>
 
         <div class="tool">
-            <strong>🎨 Brand Kit</strong>
-            <span>ألوان وهوية مشروعك</span>
+            <strong>هوية العلامة</strong>
+            <span>ألوان وأسلوب مشروعك</span>
         </div>
 
         <div class="tool">
-            <strong>🌐 إنشاء صفحة</strong>
-            <span>Landing Page لمشروعك</span>
+            <strong>إنشاء صفحة</strong>
+            <span>صفحة تعريف لمشروعك</span>
         </div>
 
     </div>
@@ -320,7 +530,7 @@ footer{
 </section>
 
 <footer>
-    © 2026 BizAI — جميع الحقوق محفوظة
+    BizAI — أدوات ذكية لنمو مشروعك
 </footer>
 
 </div>
