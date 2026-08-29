@@ -35,13 +35,11 @@ color:var(--text);
 font-family:
 "SF Pro Display",
 "SF Pro Text",
-"SF Arabic",
 "Noto Sans Arabic",
 -apple-system,
 BlinkMacSystemFont,
 "Segoe UI",
-Arial,
-sans-serif;
+Arial,sans-serif;
 }
 
 .container{
@@ -113,7 +111,7 @@ right:0;
 width:140px;
 padding:7px;
 border-radius:18px;
-background:rgba(25,25,31,.85);
+background:rgba(25,25,31,.88);
 border:1px solid rgba(255,255,255,.13);
 backdrop-filter:blur(30px);
 -webkit-backdrop-filter:blur(30px);
@@ -141,8 +139,6 @@ cursor:pointer;
 background:rgba(155,108,255,.15);
 color:#b99aff;
 }
-
-/* HERO */
 
 .hero{
 text-align:center;
@@ -187,8 +183,6 @@ font-size:16px;
 line-height:1.8;
 }
 
-/* GENERATOR */
-
 .generator{
 margin:20px 0 70px;
 padding:25px;
@@ -217,8 +211,6 @@ color:#777780;
 font-size:14px;
 }
 
-/* FORM */
-
 .formgrid{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -240,9 +232,104 @@ font-size:13px;
 color:#aaaab2;
 }
 
-select,
+/* CUSTOM GLASS SELECT */
+
+.custom-select{
+position:relative;
+width:100%;
+}
+
+.select-button{
+width:100%;
+min-height:50px;
+padding:14px;
+border-radius:17px;
+border:1px solid rgba(255,255,255,.1);
+background:rgba(0,0,0,.22);
+color:#fff;
+font-family:inherit;
+font-size:14px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+cursor:pointer;
+transition:.2s;
+}
+
+.select-button:hover,
+.custom-select.open .select-button{
+border-color:rgba(155,108,255,.45);
+background:rgba(155,108,255,.08);
+}
+
+.arrow{
+width:8px;
+height:8px;
+border-right:1.5px solid #aaa;
+border-bottom:1.5px solid #aaa;
+transform:rotate(45deg);
+transition:.2s;
+margin-left:4px;
+}
+
+.custom-select.open .arrow{
+transform:rotate(225deg);
+margin-top:5px;
+}
+
+.select-menu{
+display:none;
+position:absolute;
+top:calc(100% + 8px);
+left:0;
+right:0;
+padding:7px;
+border-radius:18px;
+background:rgba(24,24,30,.94);
+border:1px solid rgba(255,255,255,.13);
+backdrop-filter:blur(30px) saturate(160%);
+-webkit-backdrop-filter:blur(30px) saturate(160%);
+box-shadow:
+0 20px 50px rgba(0,0,0,.45),
+inset 0 1px 0 rgba(255,255,255,.08);
+z-index:200;
+max-height:240px;
+overflow-y:auto;
+}
+
+.custom-select.open .select-menu{
+display:block;
+}
+
+.select-option{
+width:100%;
+padding:12px 13px;
+border:0;
+border-radius:12px;
+background:transparent;
+color:#ddd;
+font-family:inherit;
+font-size:14px;
+text-align:start;
+cursor:pointer;
+transition:.15s;
+}
+
+.select-option:hover{
+background:rgba(155,108,255,.13);
+color:#c5aaff;
+}
+
+.select-option.selected{
+background:rgba(155,108,255,.18);
+color:#c5aaff;
+}
+
 textarea{
 width:100%;
+min-height:135px;
+resize:vertical;
 border:1px solid rgba(255,255,255,.1);
 outline:none;
 border-radius:17px;
@@ -251,16 +338,6 @@ color:white;
 padding:14px;
 font-family:inherit;
 font-size:14px;
-}
-
-select option{
-background:#17171c;
-color:white;
-}
-
-textarea{
-min-height:135px;
-resize:vertical;
 line-height:1.7;
 }
 
@@ -286,8 +363,6 @@ rgba(103,57,190,.4)
 opacity:.55;
 cursor:not-allowed;
 }
-
-/* RESULT */
 
 .loading{
 display:none;
@@ -334,8 +409,6 @@ color:#ddd;
 color:#ff929d;
 }
 
-/* FOOTER */
-
 footer{
 border-top:1px solid rgba(255,255,255,.07);
 margin-top:70px;
@@ -350,8 +423,6 @@ color:#aaa;
 font-weight:600;
 margin-bottom:7px;
 }
-
-/* MOBILE */
 
 @media(max-width:700px){
 
@@ -415,26 +486,21 @@ Biz<span>AI</span>
 
 <div class="lang">
 
-<button
-class="glass langbtn"
+<button class="glass langbtn"
 onclick="toggleLang()"
 id="langBtn">
 العربية
 </button>
 
-<div
-class="langmenu"
-id="langMenu">
+<div class="langmenu" id="langMenu">
 
-<button
-class="langoption active"
+<button class="langoption active"
 onclick="setLang('ar')"
 id="arOption">
 العربية
 </button>
 
-<button
-class="langoption"
+<button class="langoption"
 onclick="setLang('en')"
 id="enOption">
 English
@@ -444,8 +510,7 @@ English
 
 </div>
 
-<button
-class="glass navbtn"
+<button class="glass navbtn"
 onclick="goGenerator()"
 id="navStart">
 ابدأ الآن
@@ -471,17 +536,13 @@ id="navStart">
 
 </section>
 
-<section
-class="generator"
-id="generator">
+<section class="generator" id="generator">
 
 <h2 id="generatorTitle">
 مولّد المحتوى
 </h2>
 
-<p
-class="generator-desc"
-id="generatorDesc">
+<p class="generator-desc" id="generatorDesc">
 حدد احتياجاتك وسيقوم BizAI بإنشاء المحتوى المناسب لك.
 </p>
 
@@ -493,15 +554,42 @@ id="generatorDesc">
 المنصة
 </label>
 
-<select id="platform">
+<div class="custom-select" data-value="Instagram">
 
-<option value="Instagram">Instagram</option>
-<option value="TikTok">TikTok</option>
-<option value="Facebook">Facebook</option>
-<option value="LinkedIn">LinkedIn</option>
-<option value="X">X</option>
+<button class="select-button" type="button">
+<span>Instagram</span>
+<i class="arrow"></i>
+</button>
 
-</select>
+<div class="select-menu">
+
+<button class="select-option selected"
+data-value="Instagram">
+Instagram
+</button>
+
+<button class="select-option"
+data-value="TikTok">
+TikTok
+</button>
+
+<button class="select-option"
+data-value="Facebook">
+Facebook
+</button>
+
+<button class="select-option"
+data-value="LinkedIn">
+LinkedIn
+</button>
+
+<button class="select-option"
+data-value="X">
+X
+</button>
+
+</div>
+</div>
 
 </div>
 
@@ -511,15 +599,42 @@ id="generatorDesc">
 نوع المحتوى
 </label>
 
-<select id="type">
+<div class="custom-select" data-value="Posts">
 
-<option value="Posts">منشورات</option>
-<option value="Captions">كابشن</option>
-<option value="Ads">إعلانات</option>
-<option value="Video Scripts">سكريبت فيديو</option>
-<option value="Product Description">وصف منتج</option>
+<button class="select-button" type="button">
+<span>منشورات</span>
+<i class="arrow"></i>
+</button>
 
-</select>
+<div class="select-menu">
+
+<button class="select-option selected"
+data-value="Posts">
+منشورات
+</button>
+
+<button class="select-option"
+data-value="Captions">
+كابشن
+</button>
+
+<button class="select-option"
+data-value="Ads">
+إعلانات
+</button>
+
+<button class="select-option"
+data-value="Video Scripts">
+سكريبت فيديو
+</button>
+
+<button class="select-option"
+data-value="Product Description">
+وصف منتج
+</button>
+
+</div>
+</div>
 
 </div>
 
@@ -529,15 +644,42 @@ id="generatorDesc">
 نبرة الكتابة
 </label>
 
-<select id="tone">
+<div class="custom-select" data-value="Professional">
 
-<option value="Professional">احترافية</option>
-<option value="Friendly">ودية</option>
-<option value="Luxury">فاخرة</option>
-<option value="Persuasive">إقناعية</option>
-<option value="Simple">بسيطة</option>
+<button class="select-button" type="button">
+<span>احترافية</span>
+<i class="arrow"></i>
+</button>
 
-</select>
+<div class="select-menu">
+
+<button class="select-option selected"
+data-value="Professional">
+احترافية
+</button>
+
+<button class="select-option"
+data-value="Friendly">
+ودية
+</button>
+
+<button class="select-option"
+data-value="Luxury">
+فاخرة
+</button>
+
+<button class="select-option"
+data-value="Persuasive">
+إقناعية
+</button>
+
+<button class="select-option"
+data-value="Simple">
+بسيطة
+</button>
+
+</div>
+</div>
 
 </div>
 
@@ -547,12 +689,27 @@ id="generatorDesc">
 لغة المحتوى
 </label>
 
-<select id="contentLanguage">
+<div class="custom-select" data-value="Arabic">
 
-<option value="Arabic">العربية</option>
-<option value="English">English</option>
+<button class="select-button" type="button">
+<span>العربية</span>
+<i class="arrow"></i>
+</button>
 
-</select>
+<div class="select-menu">
+
+<button class="select-option selected"
+data-value="Arabic">
+العربية
+</button>
+
+<button class="select-option"
+data-value="English">
+English
+</button>
+
+</div>
+</div>
 
 </div>
 
@@ -562,14 +719,37 @@ id="generatorDesc">
 عدد النتائج
 </label>
 
-<select id="count">
+<div class="custom-select" data-value="1">
 
-<option value="1">1</option>
-<option value="3">3</option>
-<option value="5">5</option>
-<option value="10">10</option>
+<button class="select-button" type="button">
+<span>1</span>
+<i class="arrow"></i>
+</button>
 
-</select>
+<div class="select-menu">
+
+<button class="select-option selected"
+data-value="1">
+1
+</button>
+
+<button class="select-option"
+data-value="3">
+3
+</button>
+
+<button class="select-option"
+data-value="5">
+5
+</button>
+
+<button class="select-option"
+data-value="10">
+10
+</button>
+
+</div>
+</div>
 
 </div>
 
@@ -595,15 +775,11 @@ id="generateBtn">
 إنشاء المحتوى
 </button>
 
-<div
-class="loading"
-id="loading">
+<div class="loading" id="loading">
 جاري إنشاء المحتوى...
 </div>
 
-<div
-class="resultbox"
-id="resultBox">
+<div class="resultbox" id="resultBox">
 
 <div class="resulttop">
 
@@ -620,10 +796,7 @@ id="copyBtn">
 
 </div>
 
-<div
-class="result"
-id="result">
-</div>
+<div class="result" id="result"></div>
 
 </div>
 
@@ -666,7 +839,6 @@ generate:"إنشاء المحتوى",
 loading:"جاري إنشاء المحتوى...",
 result:"النتيجة",
 copy:"نسخ",
-copied:"تم النسخ",
 copyright:"© 2026 BizAI — جميع الحقوق محفوظة."
 },
 
@@ -689,7 +861,6 @@ generate:"Generate Content",
 loading:"Creating your content...",
 result:"Result",
 copy:"Copy",
-copied:"Copied",
 copyright:"© 2026 BizAI — All rights reserved."
 }
 
@@ -716,7 +887,6 @@ document.getElementById("navStart").textContent=t.nav;
 document.getElementById("badge").textContent=t.badge;
 document.getElementById("heroTitle").innerHTML=t.hero;
 document.getElementById("heroText").textContent=t.heroText;
-
 document.getElementById("generatorTitle").textContent=t.title;
 document.getElementById("generatorDesc").textContent=t.desc;
 
@@ -734,28 +904,16 @@ document.getElementById("resultTitle").textContent=t.result;
 document.getElementById("copyBtn").textContent=t.copy;
 document.getElementById("copyright").textContent=t.copyright;
 
-document
-.getElementById("arOption")
-.classList.toggle(
-"active",
-lang==="ar"
-);
+document.getElementById("arOption")
+.classList.toggle("active",lang==="ar");
 
-document
-.getElementById("enOption")
-.classList.toggle(
-"active",
-lang==="en"
-);
+document.getElementById("enOption")
+.classList.toggle("active",lang==="en");
 
-document
-.getElementById("langMenu")
+document.getElementById("langMenu")
 .classList.remove("show");
 
-localStorage.setItem(
-"bizai-language",
-lang
-);
+localStorage.setItem("bizai-language",lang);
 
 }
 
@@ -769,11 +927,76 @@ behavior:"smooth"
 
 }
 
+/* CUSTOM SELECTS */
+
+document.querySelectorAll(".custom-select")
+.forEach(select=>{
+
+const button=
+select.querySelector(".select-button");
+
+const options=
+select.querySelectorAll(".select-option");
+
+button.addEventListener("click",e=>{
+
+e.stopPropagation();
+
+document
+.querySelectorAll(".custom-select.open")
+.forEach(other=>{
+
+if(other!==select)
+other.classList.remove("open");
+
+});
+
+select.classList.toggle("open");
+
+});
+
+options.forEach(option=>{
+
+option.addEventListener("click",e=>{
+
+e.stopPropagation();
+
+select.dataset.value=
+option.dataset.value;
+
+button.querySelector("span").textContent=
+option.textContent;
+
+options.forEach(o=>
+o.classList.remove("selected")
+);
+
+option.classList.add("selected");
+
+select.classList.remove("open");
+
+});
+
+});
+
+});
+
+document.addEventListener("click",()=>{
+
+document
+.querySelectorAll(".custom-select.open")
+.forEach(select=>
+select.classList.remove("open")
+);
+
+});
+
+/* GENERATE */
+
 async function generateContent(){
 
 const details=
-document
-.getElementById("prompt")
+document.getElementById("prompt")
 .value
 .trim();
 
@@ -807,20 +1030,23 @@ return;
 
 }
 
+const selects=
+document.querySelectorAll(".custom-select");
+
 const platform=
-document.getElementById("platform").value;
+selects[0].dataset.value;
 
 const type=
-document.getElementById("type").value;
+selects[1].dataset.value;
 
 const tone=
-document.getElementById("tone").value;
+selects[2].dataset.value;
 
 const contentLanguage=
-document.getElementById("contentLanguage").value;
+selects[3].dataset.value;
 
 const count=
-document.getElementById("count").value;
+selects[4].dataset.value;
 
 const finalPrompt=`
 
