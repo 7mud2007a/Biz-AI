@@ -3,515 +3,411 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>BizAI</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
 
 :root{
-    --bg:#050507;
-    --text:#f5f5f7;
-    --muted:#92929a;
-    --purple:#9b6cff;
-    --border:rgba(255,255,255,.12);
-    --glass:rgba(255,255,255,.065);
+--bg:#050507;
+--text:#f5f5f7;
+--muted:#92929a;
+--purple:#9b6cff;
+--border:rgba(255,255,255,.12);
 }
 
-*{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-    margin:0;
-    min-height:100vh;
-    color:var(--text);
-    background:
-        radial-gradient(circle at 50% -10%,#39206d 0,transparent 35%),
-        radial-gradient(circle at 100% 40%,#1a1232 0,transparent 25%),
-        var(--bg);
-
-    font-family:
-        "SF Pro Display",
-        "SF Pro Text",
-        "SF Arabic",
-        "Noto Sans Arabic",
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    overflow-x:hidden;
+margin:0;
+min-height:100vh;
+color:var(--text);
+background:
+radial-gradient(circle at 50% -10%,#39206d 0,transparent 35%),
+radial-gradient(circle at 100% 40%,#1a1232 0,transparent 25%),
+var(--bg);
+font-family:
+"SF Pro Display",
+"SF Pro Text",
+"SF Arabic",
+"Noto Sans Arabic",
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+Arial,sans-serif;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    width:280px;
-    height:280px;
-    top:20%;
-    left:-120px;
-    background:#8b5cf6;
-    filter:blur(130px);
-    opacity:.12;
-    pointer-events:none;
-}
-
-.container{
-    width:min(92%,1080px);
-    margin:auto;
-}
-
-/* NAV */
+.container{width:min(92%,1080px);margin:auto}
 
 nav{
-    height:82px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+height:82px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 .logo{
-    font-size:25px;
-    font-weight:700;
-    letter-spacing:-1px;
+font-size:25px;
+font-weight:700;
+letter-spacing:-1px;
 }
 
-.logo span{
-    color:#a77aff;
-}
+.logo span{color:#a77aff}
 
 .nav-actions{
-    display:flex;
-    align-items:center;
-    gap:9px;
+display:flex;
+align-items:center;
+gap:8px;
 }
-
-/* GLASS BUTTON */
 
 .glass-btn{
-    color:white;
-    border:1px solid rgba(255,255,255,.14);
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.13),
-            rgba(255,255,255,.045)
-        );
-
-    backdrop-filter:blur(22px) saturate(150%);
-    -webkit-backdrop-filter:blur(22px) saturate(150%);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.12),
-        0 8px 30px rgba(0,0,0,.25);
-
-    cursor:pointer;
-}
-
-.lang-button{
-    min-width:86px;
-    padding:10px 13px;
-    border-radius:14px;
-    font-size:13px;
+color:white;
+border:1px solid rgba(255,255,255,.14);
+background:linear-gradient(
+180deg,
+rgba(255,255,255,.13),
+rgba(255,255,255,.045)
+);
+backdrop-filter:blur(22px) saturate(150%);
+-webkit-backdrop-filter:blur(22px) saturate(150%);
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.12),
+0 8px 30px rgba(0,0,0,.25);
+cursor:pointer;
+font-family:inherit;
 }
 
 .nav-btn{
-    padding:10px 17px;
-    border-radius:14px;
-    font-size:14px;
+padding:10px 17px;
+border-radius:14px;
+font-size:14px;
 }
 
-/* LANGUAGE MENU */
+.lang-wrap{position:relative}
 
-.language-wrap{
-    position:relative;
+.lang-btn{
+padding:10px 14px;
+border-radius:14px;
+font-size:13px;
 }
 
-.language-menu{
-    position:absolute;
-    top:52px;
-    right:0;
-    width:145px;
-    padding:7px;
-
-    display:none;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(35,35,42,.88),
-            rgba(15,15,20,.78)
-        );
-
-    border:1px solid rgba(255,255,255,.13);
-    border-radius:18px;
-
-    backdrop-filter:blur(30px) saturate(160%);
-    -webkit-backdrop-filter:blur(30px) saturate(160%);
-
-    box-shadow:
-        0 18px 50px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.10);
-
-    z-index:100;
+.lang-menu{
+position:absolute;
+top:52px;
+right:0;
+width:140px;
+padding:7px;
+display:none;
+z-index:50;
+background:rgba(25,25,31,.82);
+border:1px solid rgba(255,255,255,.13);
+border-radius:18px;
+backdrop-filter:blur(30px) saturate(160%);
+-webkit-backdrop-filter:blur(30px) saturate(160%);
+box-shadow:0 18px 50px rgba(0,0,0,.45);
 }
 
-.language-menu.show{
-    display:block;
-    animation:menuIn .18s ease;
+.lang-menu.show{display:block}
+
+.lang-option{
+width:100%;
+padding:11px;
+border:0;
+background:transparent;
+color:#ddd;
+border-radius:12px;
+font-family:inherit;
+text-align:start;
+cursor:pointer;
 }
 
-@keyframes menuIn{
-    from{
-        opacity:0;
-        transform:translateY(-6px) scale(.97);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
-
-.language-option{
-    width:100%;
-    padding:11px 12px;
-    border:0;
-    border-radius:12px;
-    background:transparent;
-    color:#ddd;
-    text-align:start;
-    font-family:inherit;
-    cursor:pointer;
-}
-
-.language-option:hover{
-    background:rgba(255,255,255,.08);
-}
-
-.language-option.active{
-    background:rgba(155,108,255,.15);
-    color:#b99aff;
+.lang-option:hover,
+.lang-option.active{
+background:rgba(155,108,255,.14);
+color:#b99aff;
 }
 
 /* HERO */
 
 .hero{
-    text-align:center;
-    padding:75px 0 60px;
+text-align:center;
+padding:75px 0 55px;
 }
 
 .badge{
-    display:inline-flex;
-    padding:9px 15px;
-    border-radius:100px;
-
-    color:#c4a8ff;
-    font-size:13px;
-
-    background:rgba(155,108,255,.09);
-    border:1px solid rgba(155,108,255,.2);
-
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
+display:inline-flex;
+padding:9px 15px;
+border-radius:100px;
+color:#c4a8ff;
+font-size:13px;
+background:rgba(155,108,255,.09);
+border:1px solid rgba(155,108,255,.2);
+backdrop-filter:blur(20px);
 }
 
 h1{
-    margin:22px auto 18px;
-    max-width:800px;
-
-    font-size:clamp(43px,8vw,74px);
-    line-height:1.05;
-    letter-spacing:-3px;
-    font-weight:700;
+margin:22px auto 18px;
+max-width:800px;
+font-size:clamp(43px,8vw,74px);
+line-height:1.05;
+letter-spacing:-3px;
 }
 
 .gradient{
-    background:linear-gradient(
-        110deg,
-        #ffffff 10%,
-        #d4c0ff 45%,
-        #9866ff 90%
-    );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+background:linear-gradient(110deg,#fff,#d4c0ff,#9866ff);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
 }
 
 .hero p{
-    max-width:620px;
-    margin:auto;
-
-    color:var(--muted);
-    font-size:16px;
-    line-height:1.8;
+max-width:620px;
+margin:auto;
+color:var(--muted);
+font-size:16px;
+line-height:1.8;
 }
 
 .main-btn{
-    margin-top:30px;
-    padding:15px 27px;
-    border-radius:17px;
-
-    font-size:15px;
-    font-weight:600;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(174,139,255,.55),
-            rgba(103,57,190,.38)
-        );
-}
-
-/* SECTION */
-
-.section-title{
-    text-align:center;
-    margin:45px 0 25px;
-}
-
-.section-title h2{
-    margin:0 0 8px;
-    font-size:27px;
-    letter-spacing:-1px;
-}
-
-.section-title p{
-    margin:0;
-    color:#777780;
+margin-top:28px;
+padding:15px 28px;
+border-radius:17px;
+font-size:15px;
+font-weight:600;
+background:linear-gradient(
+180deg,
+rgba(174,139,255,.55),
+rgba(103,57,190,.38)
+);
 }
 
 /* FEATURES */
 
+.section-title{
+text-align:center;
+margin:45px 0 25px;
+}
+
+.section-title h2{
+margin:0 0 8px;
+font-size:27px;
+}
+
+.section-title p{
+margin:0;
+color:#777780;
+}
+
 .features{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
 }
 
 .card{
-    min-height:190px;
-    padding:24px;
-    border-radius:25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.095),
-            rgba(255,255,255,.035)
-        );
-
-    border:1px solid var(--border);
-
-    backdrop-filter:blur(28px) saturate(150%);
-    -webkit-backdrop-filter:blur(28px) saturate(150%);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.10),
-        0 18px 50px rgba(0,0,0,.20);
-
-    transition:.25s ease;
-}
-
-.card:hover{
-    transform:translateY(-4px);
-    border-color:rgba(167,122,255,.35);
+min-height:180px;
+padding:24px;
+border-radius:25px;
+background:linear-gradient(
+145deg,
+rgba(255,255,255,.095),
+rgba(255,255,255,.035)
+);
+border:1px solid var(--border);
+backdrop-filter:blur(28px) saturate(150%);
+-webkit-backdrop-filter:blur(28px) saturate(150%);
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.1),
+0 18px 50px rgba(0,0,0,.2);
 }
 
 .icon{
-    width:43px;
-    height:43px;
-    border-radius:14px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(155,108,255,.10);
-    border:1px solid rgba(155,108,255,.18);
-
-    margin-bottom:20px;
+width:43px;
+height:43px;
+border-radius:14px;
+background:rgba(155,108,255,.1);
+border:1px solid rgba(155,108,255,.18);
+margin-bottom:20px;
+position:relative;
 }
 
-.icon::after{
-    content:"";
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#a77aff;
-    box-shadow:0 0 18px #9b6cff;
+.icon:after{
+content:"";
+position:absolute;
+width:9px;
+height:9px;
+border-radius:50%;
+background:#a77aff;
+box-shadow:0 0 18px #9b6cff;
+top:16px;
+left:16px;
 }
 
 .card h3{
-    margin:0 0 9px;
-    font-size:17px;
+margin:0 0 9px;
+font-size:17px;
 }
 
 .card p{
-    margin:0;
-    color:#888891;
-    line-height:1.7;
-    font-size:14px;
+margin:0;
+color:#888891;
+line-height:1.7;
+font-size:14px;
 }
 
-/* DASHBOARD */
+/* GENERATOR */
 
-.dashboard{
-    margin:70px 0 40px;
-    padding:23px;
-    border-radius:29px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.085),
-            rgba(255,255,255,.035)
-        );
-
-    border:1px solid rgba(255,255,255,.12);
-
-    backdrop-filter:blur(30px) saturate(150%);
-    -webkit-backdrop-filter:blur(30px) saturate(150%);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.10),
-        0 25px 70px rgba(0,0,0,.28);
+.generator{
+margin:65px 0;
+padding:25px;
+border-radius:29px;
+background:linear-gradient(
+145deg,
+rgba(255,255,255,.09),
+rgba(255,255,255,.035)
+);
+border:1px solid rgba(255,255,255,.12);
+backdrop-filter:blur(30px) saturate(150%);
+-webkit-backdrop-filter:blur(30px) saturate(150%);
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.1),
+0 25px 70px rgba(0,0,0,.28);
 }
 
-.dashboard-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:20px;
+.generator-title{
+margin-bottom:20px;
 }
 
-.dashboard-top h2{
-    margin:0;
-    font-size:22px;
+.generator-title h2{
+margin:0 0 7px;
+font-size:24px;
 }
 
-.dashboard-top small{
-    color:#777780;
+.generator-title p{
+margin:0;
+color:#777780;
+font-size:14px;
 }
 
-.status{
-    color:#9f79ff;
-    font-size:13px;
+textarea{
+width:100%;
+min-height:150px;
+resize:vertical;
+border:1px solid rgba(255,255,255,.1);
+outline:none;
+border-radius:20px;
+padding:18px;
+background:rgba(0,0,0,.2);
+color:white;
+font-family:inherit;
+font-size:15px;
+line-height:1.7;
 }
 
-.tools{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+textarea::placeholder{color:#66666e}
+
+.generate-row{
+display:flex;
+justify-content:flex-start;
+margin-top:12px;
 }
 
-.tool{
-    padding:19px;
-    border-radius:19px;
-
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.075);
-
-    transition:.2s;
+.generate-btn{
+padding:14px 23px;
+border-radius:15px;
+font-weight:600;
+font-size:14px;
+background:linear-gradient(
+180deg,
+rgba(174,139,255,.55),
+rgba(103,57,190,.38)
+);
 }
 
-.tool:hover{
-    background:rgba(255,255,255,.075);
+.loading{
+display:none;
+margin-top:18px;
+color:#a98aff;
+font-size:13px;
 }
 
-.tool strong{
-    display:block;
-    margin-bottom:7px;
-    font-size:15px;
+.result{
+display:none;
+margin-top:18px;
+padding:20px;
+border-radius:20px;
+background:rgba(0,0,0,.2);
+border:1px solid rgba(255,255,255,.08);
+white-space:pre-wrap;
+line-height:1.8;
+font-size:14px;
 }
 
-.tool span{
-    color:#777780;
-    font-size:13px;
+.error{
+color:#ff8d9a;
 }
 
 /* FOOTER */
 
 footer{
-    margin-top:80px;
-    padding:35px 0 45px;
-
-    text-align:center;
-
-    color:#66666f;
-    font-size:12px;
-
-    border-top:1px solid rgba(255,255,255,.07);
+margin-top:70px;
+padding:35px 0 45px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.07);
+color:#66666f;
+font-size:12px;
 }
 
 .footer-brand{
-    color:#aaa;
-    font-weight:600;
-    margin-bottom:7px;
+color:#aaa;
+font-weight:600;
+margin-bottom:7px;
 }
 
 /* MOBILE */
 
 @media(max-width:700px){
 
-    .container{
-        width:90%;
-    }
+.container{width:90%}
 
-    nav{
-        height:72px;
-    }
+nav{height:72px}
 
-    .nav-actions{
-        gap:6px;
-    }
+.nav-btn{padding:9px 13px}
 
-    .nav-btn{
-        padding:9px 13px;
-    }
+.lang-btn{padding:9px 11px}
 
-    .lang-button{
-        min-width:76px;
-        padding:9px 10px;
-    }
+.hero{padding:55px 0 45px}
 
-    .hero{
-        padding:55px 0 45px;
-    }
+h1{
+font-size:45px;
+letter-spacing:-2.5px;
+}
 
-    h1{
-        font-size:45px;
-        letter-spacing:-2.5px;
-    }
+.hero p{font-size:15px}
 
-    .hero p{
-        font-size:15px;
-    }
+.features{
+grid-template-columns:1fr;
+}
 
-    .features{
-        grid-template-columns:1fr;
-    }
+.card{
+min-height:auto;
+padding:22px;
+}
 
-    .card{
-        min-height:auto;
-        padding:22px;
-    }
+.generator{
+padding:18px;
+border-radius:25px;
+}
 
-    .tools{
-        grid-template-columns:1fr;
-    }
+.generate-row{
+width:100%;
+}
 
-    .dashboard{
-        padding:18px;
-        border-radius:25px;
-    }
+.generate-btn{
+width:100%;
+}
 }
 </style>
 </head>
@@ -522,204 +418,183 @@ footer{
 
 <nav>
 
-    <div class="logo">
-        Biz<span>AI</span>
-    </div>
+<div class="logo">Biz<span>AI</span></div>
 
-    <div class="nav-actions">
+<div class="nav-actions">
 
-        <div class="language-wrap">
+<div class="lang-wrap">
 
-            <button
-                class="glass-btn lang-button"
-                onclick="toggleLanguageMenu()"
-                id="languageButton"
-            >
-                العربية
-            </button>
+<button
+class="glass-btn lang-btn"
+onclick="toggleLang()"
+id="langButton">
+العربية
+</button>
 
-            <div class="language-menu" id="languageMenu">
+<div class="lang-menu" id="langMenu">
 
-                <button
-                    class="language-option active"
-                    onclick="setLanguage('ar')"
-                    id="arOption"
-                >
-                    العربية
-                </button>
+<button
+class="lang-option active"
+onclick="setLang('ar')"
+id="arOption">
+العربية
+</button>
 
-                <button
-                    class="language-option"
-                    onclick="setLanguage('en')"
-                    id="enOption"
-                >
-                    English
-                </button>
+<button
+class="lang-option"
+onclick="setLang('en')"
+id="enOption">
+English
+</button>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
-        <button
-            class="glass-btn nav-btn"
-            onclick="start()"
-            id="navStart"
-        >
-            ابدأ الآن
-        </button>
+<button
+class="glass-btn nav-btn"
+onclick="scrollToGenerator()"
+id="navStart">
+ابدأ الآن
+</button>
 
-    </div>
+</div>
 
 </nav>
 
 <section class="hero">
 
-    <div class="badge" id="badge">
-        مساعد الأعمال الذكي
-    </div>
+<div class="badge" id="badge">
+مساعد الأعمال الذكي
+</div>
 
-    <h1 id="heroTitle">
-        ابنِ مشروعك
-        <span class="gradient">بذكاء</span>
-    </h1>
+<h1 id="heroTitle">
+ابنِ مشروعك <span class="gradient">بذكاء</span>
+</h1>
 
-    <p id="heroText">
-        أدوات ذكية تساعدك على بناء علامتك التجارية،
-        صناعة المحتوى، وتحسين حضورك الرقمي من مكان واحد.
-    </p>
+<p id="heroText">
+أدوات ذكية تساعدك على بناء علامتك التجارية،
+صناعة المحتوى، وتحسين حضورك الرقمي من مكان واحد.
+</p>
 
-    <button
-        class="glass-btn main-btn"
-        onclick="start()"
-        id="heroButton"
-    >
-        ابدأ مجاناً
-    </button>
+<button
+class="glass-btn main-btn"
+onclick="scrollToGenerator()"
+id="heroButton">
+ابدأ مجاناً
+</button>
 
 </section>
 
 <div class="section-title">
 
-    <h2 id="sectionTitle">
-        كل أدوات مشروعك
-    </h2>
+<h2 id="sectionTitle">كل أدوات مشروعك</h2>
 
-    <p id="sectionText">
-        بسيطة، سريعة، ومصممة لتشتغل معك.
-    </p>
+<p id="sectionText">
+بسيطة، سريعة، ومصممة لتشتغل معك.
+</p>
 
 </div>
 
 <section class="features">
 
-    <div class="card">
-        <div class="icon"></div>
-        <h3 id="card1Title">صناعة المحتوى</h3>
-        <p id="card1Text">
-            أنشئ منشورات وأفكار فيديوهات وإعلانات تناسب مشروعك.
-        </p>
-    </div>
+<div class="card">
+<div class="icon"></div>
+<h3 id="card1Title">صناعة المحتوى</h3>
+<p id="card1Text">
+أنشئ منشورات وأفكار فيديوهات وإعلانات تناسب مشروعك.
+</p>
+</div>
 
-    <div class="card">
-        <div class="icon"></div>
-        <h3 id="card2Title">تحليل الحساب</h3>
-        <p id="card2Text">
-            اكتشف نقاط القوة والضعف في حضورك على منصات التواصل.
-        </p>
-    </div>
+<div class="card">
+<div class="icon"></div>
+<h3 id="card2Title">تحليل الحساب</h3>
+<p id="card2Text">
+اكتشف نقاط القوة والضعف في حضورك على منصات التواصل.
+</p>
+</div>
 
-    <div class="card">
-        <div class="icon"></div>
-        <h3 id="card3Title">هوية العلامة</h3>
-        <p id="card3Text">
-            أنشئ هوية متناسقة من الاسم إلى الألوان والوصف.
-        </p>
-    </div>
+<div class="card">
+<div class="icon"></div>
+<h3 id="card3Title">هوية العلامة</h3>
+<p id="card3Text">
+أنشئ هوية متناسقة من الاسم إلى الألوان والوصف.
+</p>
+</div>
 
-    <div class="card">
-        <div class="icon"></div>
-        <h3 id="card4Title">صفحة مشروع</h3>
-        <p id="card4Text">
-            أنشئ صفحة تعريف احترافية لمشروعك خلال دقائق.
-        </p>
-    </div>
+<div class="card">
+<div class="icon"></div>
+<h3 id="card4Title">صفحة مشروع</h3>
+<p id="card4Text">
+أنشئ صفحة تعريف احترافية لمشروعك خلال دقائق.
+</p>
+</div>
 
-    <div class="card">
-        <div class="icon"></div>
-        <h3 id="card5Title">خطة محتوى</h3>
-        <p id="card5Text">
-            احصل على خطة نشر منظمة تساعدك على الاستمرار.
-        </p>
-    </div>
+<div class="card">
+<div class="icon"></div>
+<h3 id="card5Title">خطة محتوى</h3>
+<p id="card5Text">
+احصل على خطة نشر منظمة تساعدك على الاستمرار.
+</p>
+</div>
 
-    <div class="card">
-        <div class="icon"></div>
-        <h3 id="card6Title">أفكار تسويقية</h3>
-        <p id="card6Text">
-            اكتشف طرقاً جديدة لجذب العملاء وتنمية مشروعك.
-        </p>
-    </div>
+<div class="card">
+<div class="icon"></div>
+<h3 id="card6Title">أفكار تسويقية</h3>
+<p id="card6Text">
+اكتشف طرقاً جديدة لجذب العملاء وتنمية مشروعك.
+</p>
+</div>
 
 </section>
 
-<section class="dashboard" id="dashboard">
+<!-- AI GENERATOR -->
 
-    <div class="dashboard-top">
+<section class="generator" id="generator">
 
-        <div>
-            <h2 id="dashboardTitle">
-                لوحة التحكم
-            </h2>
+<div class="generator-title">
 
-            <small id="dashboardSubtitle">
-                مساحة عملك
-            </small>
-        </div>
+<h2 id="generatorTitle">
+مولّد المحتوى بالذكاء الاصطناعي
+</h2>
 
-        <div
-            class="status"
-            id="status"
-        >
-            جاهز
-        </div>
+<p id="generatorText">
+اكتب ما تريد، وBizAI سيجهز لك المحتوى.
+</p>
 
-    </div>
+</div>
 
-    <div class="tools">
+<textarea
+id="prompt"
+placeholder="مثال: اكتب لي 5 منشورات لمحل ملابس نسائية في ألمانيا..."
+></textarea>
 
-        <div class="tool">
-            <strong id="tool1Title">إنشاء محتوى</strong>
-            <span id="tool1Text">منشورات وإعلانات وأفكار</span>
-        </div>
+<div class="generate-row">
 
-        <div class="tool">
-            <strong id="tool2Title">تحليل الحساب</strong>
-            <span id="tool2Text">تحليل الأداء والمنافسين</span>
-        </div>
+<button
+class="glass-btn generate-btn"
+onclick="generateContent()"
+id="generateButton">
+إنشاء المحتوى
+</button>
 
-        <div class="tool">
-            <strong id="tool3Title">هوية العلامة</strong>
-            <span id="tool3Text">ألوان وأسلوب مشروعك</span>
-        </div>
+</div>
 
-        <div class="tool">
-            <strong id="tool4Title">إنشاء صفحة</strong>
-            <span id="tool4Text">صفحة تعريف لمشروعك</span>
-        </div>
+<div class="loading" id="loading">
+جاري إنشاء المحتوى...
+</div>
 
-    </div>
+<div class="result" id="result"></div>
 
 </section>
 
 <footer>
 
-    <div class="footer-brand">
-        BizAI
-    </div>
+<div class="footer-brand">BizAI</div>
 
-    <div id="copyright">
-        © 2026 BizAI — جميع الحقوق محفوظة.
-    </div>
+<div id="copyright">
+© 2026 BizAI — جميع الحقوق محفوظة.
+</div>
 
 </footer>
 
@@ -727,182 +602,188 @@ footer{
 
 <script>
 
-const translations = {
+const translations={
 
-    ar:{
-        language:"العربية",
-        navStart:"ابدأ الآن",
-        badge:"مساعد الأعمال الذكي",
-        heroTitle:'ابنِ مشروعك <span class="gradient">بذكاء</span>',
-        heroText:"أدوات ذكية تساعدك على بناء علامتك التجارية، صناعة المحتوى، وتحسين حضورك الرقمي من مكان واحد.",
-        heroButton:"ابدأ مجاناً",
+ar:{
+language:"العربية",
+navStart:"ابدأ الآن",
+badge:"مساعد الأعمال الذكي",
+heroTitle:'ابنِ مشروعك <span class="gradient">بذكاء</span>',
+heroText:"أدوات ذكية تساعدك على بناء علامتك التجارية، صناعة المحتوى، وتحسين حضورك الرقمي من مكان واحد.",
+heroButton:"ابدأ مجاناً",
+sectionTitle:"كل أدوات مشروعك",
+sectionText:"بسيطة، سريعة، ومصممة لتشتغل معك.",
+card1Title:"صناعة المحتوى",
+card1Text:"أنشئ منشورات وأفكار فيديوهات وإعلانات تناسب مشروعك.",
+card2Title:"تحليل الحساب",
+card2Text:"اكتشف نقاط القوة والضعف في حضورك على منصات التواصل.",
+card3Title:"هوية العلامة",
+card3Text:"أنشئ هوية متناسقة من الاسم إلى الألوان والوصف.",
+card4Title:"صفحة مشروع",
+card4Text:"أنشئ صفحة تعريف احترافية لمشروعك خلال دقائق.",
+card5Title:"خطة محتوى",
+card5Text:"احصل على خطة نشر منظمة تساعدك على الاستمرار.",
+card6Title:"أفكار تسويقية",
+card6Text:"اكتشف طرقاً جديدة لجذب العملاء وتنمية مشروعك.",
+generatorTitle:"مولّد المحتوى بالذكاء الاصطناعي",
+generatorText:"اكتب ما تريد، وBizAI سيجهز لك المحتوى.",
+placeholder:"مثال: اكتب لي 5 منشورات لمحل ملابس نسائية في ألمانيا...",
+generateButton:"إنشاء المحتوى",
+loading:"جاري إنشاء المحتوى...",
+copyright:"© 2026 BizAI — جميع الحقوق محفوظة."
+},
 
-        sectionTitle:"كل أدوات مشروعك",
-        sectionText:"بسيطة، سريعة، ومصممة لتشتغل معك.",
-
-        card1Title:"صناعة المحتوى",
-        card1Text:"أنشئ منشورات وأفكار فيديوهات وإعلانات تناسب مشروعك.",
-
-        card2Title:"تحليل الحساب",
-        card2Text:"اكتشف نقاط القوة والضعف في حضورك على منصات التواصل.",
-
-        card3Title:"هوية العلامة",
-        card3Text:"أنشئ هوية متناسقة من الاسم إلى الألوان والوصف.",
-
-        card4Title:"صفحة مشروع",
-        card4Text:"أنشئ صفحة تعريف احترافية لمشروعك خلال دقائق.",
-
-        card5Title:"خطة محتوى",
-        card5Text:"احصل على خطة نشر منظمة تساعدك على الاستمرار.",
-
-        card6Title:"أفكار تسويقية",
-        card6Text:"اكتشف طرقاً جديدة لجذب العملاء وتنمية مشروعك.",
-
-        dashboardTitle:"لوحة التحكم",
-        dashboardSubtitle:"مساحة عملك",
-        status:"جاهز",
-
-        tool1Title:"إنشاء محتوى",
-        tool1Text:"منشورات وإعلانات وأفكار",
-
-        tool2Title:"تحليل الحساب",
-        tool2Text:"تحليل الأداء والمنافسين",
-
-        tool3Title:"هوية العلامة",
-        tool3Text:"ألوان وأسلوب مشروعك",
-
-        tool4Title:"إنشاء صفحة",
-        tool4Text:"صفحة تعريف لمشروعك",
-
-        copyright:"© 2026 BizAI — جميع الحقوق محفوظة."
-    },
-
-    en:{
-        language:"English",
-        navStart:"Get Started",
-        badge:"Your AI Business Assistant",
-        heroTitle:'Build your business <span class="gradient">smarter</span>',
-        heroText:"Smart tools to build your brand, create content, and improve your digital presence — all in one place.",
-        heroButton:"Start Free",
-
-        sectionTitle:"Everything Your Business Needs",
-        sectionText:"Simple, fast, and designed to work with you.",
-
-        card1Title:"Content Creation",
-        card1Text:"Create posts, video ideas, and ads tailored to your business.",
-
-        card2Title:"Account Analysis",
-        card2Text:"Discover the strengths and weaknesses of your social presence.",
-
-        card3Title:"Brand Identity",
-        card3Text:"Build a consistent identity from your name to your colors and description.",
-
-        card4Title:"Business Page",
-        card4Text:"Create a professional landing page for your business in minutes.",
-
-        card5Title:"Content Plan",
-        card5Text:"Get an organized publishing plan that keeps you consistent.",
-
-        card6Title:"Marketing Ideas",
-        card6Text:"Discover new ways to attract customers and grow your business.",
-
-        dashboardTitle:"Dashboard",
-        dashboardSubtitle:"Your workspace",
-        status:"Ready",
-
-        tool1Title:"Create Content",
-        tool1Text:"Posts, ads and ideas",
-
-        tool2Title:"Account Analysis",
-        tool2Text:"Performance and competitor analysis",
-
-        tool3Title:"Brand Identity",
-        tool3Text:"Your brand colors and style",
-
-        tool4Title:"Create a Page",
-        tool4Text:"A landing page for your business",
-
-        copyright:"© 2026 BizAI — All rights reserved."
-    }
+en:{
+language:"English",
+navStart:"Get Started",
+badge:"Your AI Business Assistant",
+heroTitle:'Build your business <span class="gradient">smarter</span>',
+heroText:"Smart tools to build your brand, create content, and improve your digital presence — all in one place.",
+heroButton:"Start Free",
+sectionTitle:"Everything Your Business Needs",
+sectionText:"Simple, fast, and designed to work with you.",
+card1Title:"Content Creation",
+card1Text:"Create posts, video ideas, and ads tailored to your business.",
+card2Title:"Account Analysis",
+card2Text:"Discover the strengths and weaknesses of your social presence.",
+card3Title:"Brand Identity",
+card3Text:"Build a consistent identity from your name to your colors and description.",
+card4Title:"Business Page",
+card4Text:"Create a professional landing page for your business in minutes.",
+card5Title:"Content Plan",
+card5Text:"Get an organized publishing plan that keeps you consistent.",
+card6Title:"Marketing Ideas",
+card6Text:"Discover new ways to attract customers and grow your business.",
+generatorTitle:"AI Content Generator",
+generatorText:"Tell us what you need and BizAI will create it for you.",
+placeholder:"Example: Write 5 Instagram posts for a women's clothing store in Germany...",
+generateButton:"Generate Content",
+loading:"Creating your content...",
+copyright:"© 2026 BizAI — All rights reserved."
+}
 
 };
 
-function toggleLanguageMenu(){
-
-    document
-        .getElementById("languageMenu")
-        .classList.toggle("show");
-
+function toggleLang(){
+document.getElementById("langMenu").classList.toggle("show");
 }
 
-function setLanguage(lang){
+function setLang(lang){
 
-    const t=translations[lang];
+const t=translations[lang];
 
-    document.documentElement.lang=lang;
-    document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+document.documentElement.lang=lang;
+document.documentElement.dir=lang==="ar"?"rtl":"ltr";
 
-    Object.keys(t).forEach(key=>{
+Object.keys(t).forEach(key=>{
 
-        const element=document.getElementById(key);
+const el=document.getElementById(key);
 
-        if(!element) return;
-
-        if(key==="heroTitle"){
-            element.innerHTML=t[key];
-        }else{
-            element.textContent=t[key];
-        }
-
-    });
-
-    document.getElementById("languageButton").textContent=t.language;
-
-    document.getElementById("arOption").classList.toggle(
-        "active",
-        lang==="ar"
-    );
-
-    document.getElementById("enOption").classList.toggle(
-        "active",
-        lang==="en"
-    );
-
-    document
-        .getElementById("languageMenu")
-        .classList.remove("show");
-
-    localStorage.setItem("bizai-language",lang);
+if(el){
+if(key==="heroTitle") el.innerHTML=t[key];
+else el.textContent=t[key];
 }
-
-function start(){
-
-    document
-        .getElementById("dashboard")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-
-}
-
-document.addEventListener("click",function(e){
-
-    const wrap=document.querySelector(".language-wrap");
-
-    if(!wrap.contains(e.target)){
-
-        document
-            .getElementById("languageMenu")
-            .classList.remove("show");
-
-    }
 
 });
 
-const savedLanguage=
-    localStorage.getItem("bizai-language") || "ar";
+document.getElementById("langButton").textContent=t.language;
+document.getElementById("arOption").classList.toggle("active",lang==="ar");
+document.getElementById("enOption").classList.toggle("active",lang==="en");
 
-setLanguage(savedLanguage);
+document.getElementById("prompt").placeholder=t.placeholder;
+
+document.getElementById("langMenu").classList.remove("show");
+
+localStorage.setItem("bizai-language",lang);
+}
+
+function scrollToGenerator(){
+
+document.getElementById("generator").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+async function generateContent(){
+
+const prompt=document.getElementById("prompt").value.trim();
+const result=document.getElementById("result");
+const loading=document.getElementById("loading");
+const button=document.getElementById("generateButton");
+
+if(!prompt){
+
+result.style.display="block";
+result.className="result error";
+result.textContent=
+document.documentElement.lang==="en"
+?"Please write your request first."
+:"اكتب طلبك أولاً.";
+
+return;
+}
+
+result.style.display="none";
+result.className="result";
+loading.style.display="block";
+button.disabled=true;
+
+try{
+
+const response=await fetch("/api/generate",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+prompt:prompt
+})
+
+});
+
+const data=await response.json();
+
+if(!response.ok){
+throw new Error(data.error || "Request failed");
+}
+
+result.textContent=data.result;
+result.style.display="block";
+
+}catch(error){
+
+result.className="result error";
+result.textContent=
+document.documentElement.lang==="en"
+?"Something went wrong: "+error.message
+:"حدث خطأ: "+error.message;
+
+result.style.display="block";
+
+}finally{
+
+loading.style.display="none";
+button.disabled=false;
+
+}
+
+}
+
+document.addEventListener("click",(event)=>{
+
+const wrap=document.querySelector(".lang-wrap");
+
+if(!wrap.contains(event.target)){
+document.getElementById("langMenu").classList.remove("show");
+}
+
+});
+
+setLang(localStorage.getItem("bizai-language")||"ar");
 
 </script>
 
