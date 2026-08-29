@@ -184,7 +184,7 @@ line-height:1.8;
 }
 
 .generator{
-margin:20px 0 70px;
+margin:20px 0 30px;
 padding:25px;
 border-radius:30px;
 background:linear-gradient(
@@ -231,8 +231,6 @@ label{
 font-size:13px;
 color:#aaaab2;
 }
-
-/* CUSTOM GLASS SELECT */
 
 .custom-select{
 position:relative;
@@ -316,13 +314,9 @@ cursor:pointer;
 transition:.15s;
 }
 
-.select-option:hover{
-background:rgba(155,108,255,.13);
-color:#c5aaff;
-}
-
+.select-option:hover,
 .select-option.selected{
-background:rgba(155,108,255,.18);
+background:rgba(155,108,255,.15);
 color:#c5aaff;
 }
 
@@ -409,6 +403,81 @@ color:#ddd;
 color:#ff929d;
 }
 
+/* IMAGE GENERATOR */
+
+.image-generator{
+margin:30px 0 70px;
+padding:25px;
+border-radius:30px;
+background:linear-gradient(
+145deg,
+rgba(255,255,255,.09),
+rgba(255,255,255,.035)
+);
+border:1px solid rgba(255,255,255,.12);
+backdrop-filter:blur(30px) saturate(150%);
+-webkit-backdrop-filter:blur(30px) saturate(150%);
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.1),
+0 25px 70px rgba(0,0,0,.3);
+}
+
+.image-generator h2{
+margin:0 0 7px;
+font-size:24px;
+}
+
+.image-desc{
+margin:0 0 25px;
+color:#777780;
+font-size:14px;
+}
+
+.image-prompt{
+min-height:120px;
+}
+
+.image-button{
+width:100%;
+margin-top:15px;
+padding:15px;
+border-radius:17px;
+font-size:15px;
+font-weight:600;
+background:linear-gradient(
+180deg,
+rgba(174,139,255,.58),
+rgba(103,57,190,.4)
+);
+}
+
+.image-button:disabled{
+opacity:.55;
+}
+
+.image-loading{
+display:none;
+text-align:center;
+padding:20px;
+color:#a98aff;
+font-size:13px;
+}
+
+.image-result{
+display:none;
+margin-top:20px;
+padding:15px;
+border-radius:22px;
+background:rgba(0,0,0,.2);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.image-result img{
+display:block;
+width:100%;
+border-radius:17px;
+}
+
 footer{
 border-top:1px solid rgba(255,255,255,.07);
 margin-top:70px;
@@ -455,7 +524,8 @@ letter-spacing:-2.5px;
 font-size:15px;
 }
 
-.generator{
+.generator,
+.image-generator{
 padding:18px;
 border-radius:25px;
 }
@@ -550,9 +620,7 @@ id="navStart">
 
 <div class="field">
 
-<label id="platformLabel">
-المنصة
-</label>
+<label id="platformLabel">المنصة</label>
 
 <div class="custom-select" data-value="Instagram">
 
@@ -563,41 +631,19 @@ id="navStart">
 
 <div class="select-menu">
 
-<button class="select-option selected"
-data-value="Instagram">
-Instagram
-</button>
-
-<button class="select-option"
-data-value="TikTok">
-TikTok
-</button>
-
-<button class="select-option"
-data-value="Facebook">
-Facebook
-</button>
-
-<button class="select-option"
-data-value="LinkedIn">
-LinkedIn
-</button>
-
-<button class="select-option"
-data-value="X">
-X
-</button>
+<button class="select-option selected" data-value="Instagram">Instagram</button>
+<button class="select-option" data-value="TikTok">TikTok</button>
+<button class="select-option" data-value="Facebook">Facebook</button>
+<button class="select-option" data-value="LinkedIn">LinkedIn</button>
+<button class="select-option" data-value="X">X</button>
 
 </div>
 </div>
-
 </div>
 
 <div class="field">
 
-<label id="typeLabel">
-نوع المحتوى
-</label>
+<label id="typeLabel">نوع المحتوى</label>
 
 <div class="custom-select" data-value="Posts">
 
@@ -608,41 +654,19 @@ X
 
 <div class="select-menu">
 
-<button class="select-option selected"
-data-value="Posts">
-منشورات
-</button>
-
-<button class="select-option"
-data-value="Captions">
-كابشن
-</button>
-
-<button class="select-option"
-data-value="Ads">
-إعلانات
-</button>
-
-<button class="select-option"
-data-value="Video Scripts">
-سكريبت فيديو
-</button>
-
-<button class="select-option"
-data-value="Product Description">
-وصف منتج
-</button>
+<button class="select-option selected" data-value="Posts">منشورات</button>
+<button class="select-option" data-value="Captions">كابشن</button>
+<button class="select-option" data-value="Ads">إعلانات</button>
+<button class="select-option" data-value="Video Scripts">سكريبت فيديو</button>
+<button class="select-option" data-value="Product Description">وصف منتج</button>
 
 </div>
 </div>
-
 </div>
 
 <div class="field">
 
-<label id="toneLabel">
-نبرة الكتابة
-</label>
+<label id="toneLabel">نبرة الكتابة</label>
 
 <div class="custom-select" data-value="Professional">
 
@@ -653,41 +677,19 @@ data-value="Product Description">
 
 <div class="select-menu">
 
-<button class="select-option selected"
-data-value="Professional">
-احترافية
-</button>
-
-<button class="select-option"
-data-value="Friendly">
-ودية
-</button>
-
-<button class="select-option"
-data-value="Luxury">
-فاخرة
-</button>
-
-<button class="select-option"
-data-value="Persuasive">
-إقناعية
-</button>
-
-<button class="select-option"
-data-value="Simple">
-بسيطة
-</button>
+<button class="select-option selected" data-value="Professional">احترافية</button>
+<button class="select-option" data-value="Friendly">ودية</button>
+<button class="select-option" data-value="Luxury">فاخرة</button>
+<button class="select-option" data-value="Persuasive">إقناعية</button>
+<button class="select-option" data-value="Simple">بسيطة</button>
 
 </div>
 </div>
-
 </div>
 
 <div class="field">
 
-<label id="languageLabel">
-لغة المحتوى
-</label>
+<label id="languageLabel">لغة المحتوى</label>
 
 <div class="custom-select" data-value="Arabic">
 
@@ -698,26 +700,16 @@ data-value="Simple">
 
 <div class="select-menu">
 
-<button class="select-option selected"
-data-value="Arabic">
-العربية
-</button>
-
-<button class="select-option"
-data-value="English">
-English
-</button>
+<button class="select-option selected" data-value="Arabic">العربية</button>
+<button class="select-option" data-value="English">English</button>
 
 </div>
 </div>
-
 </div>
 
 <div class="field">
 
-<label id="countLabel">
-عدد النتائج
-</label>
+<label id="countLabel">عدد النتائج</label>
 
 <div class="custom-select" data-value="1">
 
@@ -728,36 +720,18 @@ English
 
 <div class="select-menu">
 
-<button class="select-option selected"
-data-value="1">
-1
-</button>
-
-<button class="select-option"
-data-value="3">
-3
-</button>
-
-<button class="select-option"
-data-value="5">
-5
-</button>
-
-<button class="select-option"
-data-value="10">
-10
-</button>
+<button class="select-option selected" data-value="1">1</button>
+<button class="select-option" data-value="3">3</button>
+<button class="select-option" data-value="5">5</button>
+<button class="select-option" data-value="10">10</button>
 
 </div>
 </div>
-
 </div>
 
 <div class="field full">
 
-<label id="detailsLabel">
-تفاصيل المحتوى
-</label>
+<label id="detailsLabel">تفاصيل المحتوى</label>
 
 <textarea
 id="prompt"
@@ -768,8 +742,7 @@ placeholder="مثال: عندي متجر ملابس رجالية وأريد من
 
 </div>
 
-<button
-class="glass generate"
+<button class="glass generate"
 onclick="generateContent()"
 id="generateBtn">
 إنشاء المحتوى
@@ -783,12 +756,9 @@ id="generateBtn">
 
 <div class="resulttop">
 
-<strong id="resultTitle">
-النتيجة
-</strong>
+<strong id="resultTitle">النتيجة</strong>
 
-<button
-class="glass copy"
+<button class="glass copy"
 onclick="copyResult()"
 id="copyBtn">
 نسخ
@@ -801,6 +771,45 @@ id="copyBtn">
 </div>
 
 </section>
+
+
+<section class="image-generator" id="imageGenerator">
+
+<h2 id="imageTitle">
+مولّد الصور
+</h2>
+
+<p class="image-desc" id="imageDesc">
+أنشئ صوراً احترافية لمشروعك باستخدام الذكاء الاصطناعي.
+</p>
+
+<textarea
+id="imagePrompt"
+class="image-prompt"
+placeholder="مثال: صورة إعلانية فاخرة لساعة رجالية سوداء على خلفية داكنة...">
+</textarea>
+
+<button
+class="glass image-button"
+onclick="generateImage()"
+id="imageButton">
+إنشاء الصورة
+</button>
+
+<div class="image-loading" id="imageLoading">
+جاري إنشاء الصورة...
+</div>
+
+<div class="image-result" id="imageResult">
+
+<img
+id="generatedImage"
+alt="Generated image">
+
+</div>
+
+</section>
+
 
 <footer>
 
@@ -815,6 +824,7 @@ BizAI
 </footer>
 
 </div>
+
 
 <script>
 
@@ -839,6 +849,11 @@ generate:"إنشاء المحتوى",
 loading:"جاري إنشاء المحتوى...",
 result:"النتيجة",
 copy:"نسخ",
+imageTitle:"مولّد الصور",
+imageDesc:"أنشئ صوراً احترافية لمشروعك باستخدام الذكاء الاصطناعي.",
+imagePlaceholder:"مثال: صورة إعلانية فاخرة لساعة رجالية سوداء على خلفية داكنة...",
+imageButton:"إنشاء الصورة",
+imageLoading:"جاري إنشاء الصورة...",
 copyright:"© 2026 BizAI — جميع الحقوق محفوظة."
 },
 
@@ -861,10 +876,16 @@ generate:"Generate Content",
 loading:"Creating your content...",
 result:"Result",
 copy:"Copy",
+imageTitle:"AI Image Generator",
+imageDesc:"Create professional images for your business using AI.",
+imagePlaceholder:"Example: A luxury advertising image of a black men's watch on a dark background...",
+imageButton:"Generate Image",
+imageLoading:"Creating your image...",
 copyright:"© 2026 BizAI — All rights reserved."
 }
 
 };
+
 
 function toggleLang(){
 
@@ -873,6 +894,7 @@ document
 .classList.toggle("show");
 
 }
+
 
 function setLang(lang){
 
@@ -887,6 +909,7 @@ document.getElementById("navStart").textContent=t.nav;
 document.getElementById("badge").textContent=t.badge;
 document.getElementById("heroTitle").innerHTML=t.hero;
 document.getElementById("heroText").textContent=t.heroText;
+
 document.getElementById("generatorTitle").textContent=t.title;
 document.getElementById("generatorDesc").textContent=t.desc;
 
@@ -902,6 +925,13 @@ document.getElementById("generateBtn").textContent=t.generate;
 document.getElementById("loading").textContent=t.loading;
 document.getElementById("resultTitle").textContent=t.result;
 document.getElementById("copyBtn").textContent=t.copy;
+
+document.getElementById("imageTitle").textContent=t.imageTitle;
+document.getElementById("imageDesc").textContent=t.imageDesc;
+document.getElementById("imagePrompt").placeholder=t.imagePlaceholder;
+document.getElementById("imageButton").textContent=t.imageButton;
+document.getElementById("imageLoading").textContent=t.imageLoading;
+
 document.getElementById("copyright").textContent=t.copyright;
 
 document.getElementById("arOption")
@@ -917,6 +947,7 @@ localStorage.setItem("bizai-language",lang);
 
 }
 
+
 function goGenerator(){
 
 document
@@ -926,6 +957,7 @@ behavior:"smooth"
 });
 
 }
+
 
 /* CUSTOM SELECTS */
 
@@ -981,6 +1013,7 @@ select.classList.remove("open");
 
 });
 
+
 document.addEventListener("click",()=>{
 
 document
@@ -991,7 +1024,8 @@ select.classList.remove("open")
 
 });
 
-/* GENERATE */
+
+/* TEXT GENERATION */
 
 async function generateContent(){
 
@@ -1138,6 +1172,111 @@ button.disabled=false;
 
 }
 
+
+/* IMAGE GENERATION */
+
+async function generateImage(){
+
+const prompt=
+document
+.getElementById("imagePrompt")
+.value
+.trim();
+
+const resultBox=
+document.getElementById("imageResult");
+
+const image=
+document.getElementById("generatedImage");
+
+const loading=
+document.getElementById("imageLoading");
+
+const button=
+document.getElementById("imageButton");
+
+const lang=
+document.documentElement.lang;
+
+if(!prompt){
+
+resultBox.style.display="block";
+
+resultBox.innerHTML=
+`<div class="result error">${
+lang==="en"
+?"Please enter an image description first."
+:"اكتب وصف الصورة أولاً."
+}</div>`;
+
+return;
+
+}
+
+button.disabled=true;
+loading.style.display="block";
+resultBox.style.display="none";
+
+try{
+
+const response=
+await fetch(
+"/api/generate-image",
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+prompt:prompt
+})
+
+});
+
+const data=
+await response.json();
+
+if(!response.ok){
+
+throw new Error(
+data.error ||
+"Image generation failed"
+);
+
+}
+
+image.src=data.image;
+
+resultBox.innerHTML="";
+resultBox.appendChild(image);
+
+resultBox.style.display="block";
+
+}catch(error){
+
+resultBox.innerHTML=
+`<div class="result error">${
+lang==="en"
+?"Something went wrong: "+error.message
+:"حدث خطأ: "+error.message
+}</div>`;
+
+resultBox.style.display="block";
+
+}finally{
+
+loading.style.display="none";
+button.disabled=false;
+
+}
+
+}
+
+
+/* COPY */
+
 async function copyResult(){
 
 const text=
@@ -1189,6 +1328,7 @@ lang==="en"
 
 }
 
+
 document.addEventListener(
 "click",
 function(e){
@@ -1205,6 +1345,7 @@ document
 }
 
 });
+
 
 setLang(
 localStorage.getItem("bizai-language") || "ar"
