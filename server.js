@@ -7,6 +7,12 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
+const MODELS = [
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+    "gemini-3.5-flash-lite"
+];
+
 app.post("/api/generate", async (req, res) => {
     try {
         const { prompt } = req.body;
@@ -25,74 +31,110 @@ app.post("/api/generate", async (req, res) => {
             });
         }
 
-        const response = await fetch(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-goog-api-key": apiKey
-                },
-                body: JSON.stringify({
-                    contents: [
-                        {
-                            role: "user",
-                            parts: [
+        let lastError = null;
+
+        for (const model of MODELS) {
+
+            try {
+
+                console.log(`Trying model: ${model}`);
+
+                const response = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            "x-goog-api-key": apiKey
+                        },
+
+                        body: JSON.stringify({
+                            contents: [
                                 {
-                                    text: `أنت مساعد تسويق احترافي لمنصة BizAI.
+                                    role: "user",
+                                    parts: [
+                                        {
+                                            text: `أنت مساعد تسويق احترافي لمنصة BizAI.
 
-مهمتك إنشاء محتوى مفيد واحترافي بناءً على طلب المستخدم.
+مهمتك إنشاء محتوى احترافي ومفيد بناءً على طلب المستخدم.
 
-اكتب باللغة المطلوبة من المستخدم.
+اكتب باللغة المطلوبة.
 لا تستخدم الإيموجي إلا إذا طلب المستخدم ذلك.
-اجعل النتيجة منظمة وسهلة النسخ والاستخدام.
-لا تضف أي شرح خارج المحتوى المطلوب.
+لا تضف شرحاً خارج المحتوى المطلوب.
+اجعل النتيجة جاهزة للنسخ والنشر.
 
 طلب المستخدم:
 
 ${prompt}`
+                                        }
+                                    ]
                                 }
                             ]
-                        }
-                    ]
-                })
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (response.ok) {
+
+                    const text =
+                        data?.candidates?.[0]?.content?.parts
+                            ?.map(part => part.text || "")
+                            .join("")
+                            .trim();
+
+                    if (text) {
+
+                        console.log(`Success with model: ${model}`);
+
+                        return res.json({
+                            result: text
+                        });
+
+                    }
+
+                    lastError = "Gemini لم يرجع أي محتوى";
+
+                } else {
+
+                    lastError =
+                        data?.error?.message ||
+                        `Model ${model} failed`;
+
+                    console.error(
+                        `Model ${model} failed:`,
+                        lastError
+                    );
+
+                }
+
+            } catch (error) {
+
+                lastError = error.message;
+
+                console.error(
+                    `Model ${model} error:`,
+                    error.message
+                );
+
             }
-        );
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            console.error("Gemini API Error:", data);
-
-            return res.status(response.status).json({
-                error:
-                    data?.error?.message ||
-                    "حدث خطأ أثناء الاتصال بـ Gemini"
-            });
         }
 
-        const text =
-            data?.candidates?.[0]?.content?.parts
-                ?.map(part => part.text || "")
-                .join("")
-                .trim();
-
-        if (!text) {
-            return res.status(500).json({
-                error: "Gemini لم يرجع أي محتوى"
-            });
-        }
-
-        res.json({
-            result: text
+        return res.status(503).json({
+            error:
+                "كل نماذج Gemini مشغولة حالياً. جرّب مرة ثانية بعد قليل."
         });
 
     } catch (error) {
+
         console.error("Server Error:", error);
 
-        res.status(500).json({
+        return res.status(500).json({
             error: "حدث خطأ في السيرفر"
         });
+
     }
 });
 
