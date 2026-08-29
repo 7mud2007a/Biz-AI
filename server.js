@@ -1,5 +1,4 @@
-<details>
-<summary>اضغط هون لفتح server.js كامل</summary>const express = require("express");
+const express = require("express");
 const path = require("path");
 
 const app = express();
@@ -22,9 +21,7 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 ========================= */
 
 app.post("/api/generate", async (req, res) => {
-
     try {
-
         const { prompt } = req.body;
 
         if (!prompt || !prompt.trim()) {
@@ -40,21 +37,17 @@ app.post("/api/generate", async (req, res) => {
         }
 
         for (const model of TEXT_MODELS) {
-
             try {
-
                 console.log(`Trying text model: ${model}`);
 
                 const response = await fetch(
                     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
                     {
                         method: "POST",
-
                         headers: {
                             "Content-Type": "application/json",
                             "x-goog-api-key": GEMINI_API_KEY
                         },
-
                         body: JSON.stringify({
                             contents: [
                                 {
@@ -84,7 +77,6 @@ ${prompt}`
                 const data = await response.json();
 
                 if (response.ok) {
-
                     const text =
                         data?.candidates?.[0]?.content?.parts
                             ?.map(part => part.text || "")
@@ -92,13 +84,10 @@ ${prompt}`
                             .trim();
 
                     if (text) {
-
                         return res.json({
                             result: text
                         });
-
                     }
-
                 }
 
                 console.error(
@@ -107,14 +96,11 @@ ${prompt}`
                 );
 
             } catch (error) {
-
                 console.error(
                     `Text model ${model} error:`,
                     error.message
                 );
-
             }
-
         }
 
         return res.status(503).json({
@@ -122,15 +108,12 @@ ${prompt}`
         });
 
     } catch (error) {
-
         console.error("Text server error:", error);
 
         return res.status(500).json({
             error: "حدث خطأ في السيرفر"
         });
-
     }
-
 });
 
 
@@ -139,25 +122,19 @@ ${prompt}`
 ========================= */
 
 app.post("/api/generate-image", async (req, res) => {
-
     try {
-
         const { prompt } = req.body;
 
         if (!prompt || !prompt.trim()) {
-
             return res.status(400).json({
                 error: "اكتب وصف الصورة أولاً"
             });
-
         }
 
         if (!GEMINI_API_KEY) {
-
             return res.status(500).json({
                 error: "Gemini API Key غير موجود على Render"
             });
-
         }
 
         console.log("Generating image with Nano Banana 2...");
@@ -166,77 +143,38 @@ app.post("/api/generate-image", async (req, res) => {
             "https://generativelanguage.googleapis.com/v1beta/interactions",
             {
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json",
                     "x-goog-api-key": GEMINI_API_KEY
                 },
-
                 body: JSON.stringify({
-
                     model: "gemini-3.1-flash-image",
-
-                    input: `
-Create exactly the image described below.
-
-USER IMAGE DESCRIPTION:
-${prompt}
-
-Follow the user's description as accurately as possible.
-
-Preserve the requested:
-- main subject
-- objects
-- environment
-- composition
-- colors
-- clothing
-- camera angle
-- lighting
-- visual style
-- atmosphere
-- proportions
-
-Do not replace the requested subject.
-Do not invent a different scene.
-Do not add unrelated objects.
-
-Create a high-quality, realistic and detailed image.
-`,
-
+                    input: prompt,
                     response_format: {
                         type: "image",
                         aspect_ratio: "1:1",
                         image_size: "2K"
                     }
-
                 })
-
             }
         );
 
         const data = await response.json();
 
         if (!response.ok) {
-
-            console.error(
-                "Nano Banana error:",
-                data
-            );
+            console.error("Nano Banana error:", data);
 
             return res.status(response.status).json({
                 error:
                     data?.error?.message ||
                     "فشل إنشاء الصورة"
             });
-
         }
 
         const image =
             data?.output_image?.data;
 
         if (!image) {
-
             console.error(
                 "No image returned:",
                 JSON.stringify(data).slice(0, 3000)
@@ -245,7 +183,6 @@ Create a high-quality, realistic and detailed image.
             return res.status(500).json({
                 error: "Gemini لم يرجع صورة"
             });
-
         }
 
         res.json({
@@ -253,7 +190,6 @@ Create a high-quality, realistic and detailed image.
         });
 
     } catch (error) {
-
         console.error(
             "Image server error:",
             error
@@ -264,9 +200,7 @@ Create a high-quality, realistic and detailed image.
                 "حدث خطأ أثناء إنشاء الصورة: " +
                 error.message
         });
-
     }
-
 });
 
 
@@ -275,11 +209,5 @@ Create a high-quality, realistic and detailed image.
 ========================= */
 
 app.listen(PORT, "0.0.0.0", () => {
-
-    console.log(
-        `BizAI running on port ${PORT}`
-    );
-
+    console.log(`BizAI running on port ${PORT}`);
 });
-
-</details>
