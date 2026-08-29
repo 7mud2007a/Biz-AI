@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BizAI</title>
 
 <style>
@@ -11,23 +11,27 @@
 :root{
 --bg:#050507;
 --text:#f5f5f7;
---muted:#92929a;
+--muted:#8d8d96;
 --purple:#9b6cff;
---border:rgba(255,255,255,.12);
 }
 
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
 
-html{scroll-behavior:smooth}
+html{
+scroll-behavior:smooth;
+}
 
 body{
 margin:0;
 min-height:100vh;
-color:var(--text);
 background:
-radial-gradient(circle at 50% -10%,#39206d 0,transparent 35%),
-radial-gradient(circle at 100% 40%,#1a1232 0,transparent 25%),
-var(--bg);
+radial-gradient(circle at 50% -15%,#3a216c,transparent 35%),
+radial-gradient(circle at 100% 45%,#21143b,transparent 25%),
+#050507;
+color:var(--text);
 font-family:
 "SF Pro Display",
 "SF Pro Text",
@@ -36,13 +40,17 @@ font-family:
 -apple-system,
 BlinkMacSystemFont,
 "Segoe UI",
-Arial,sans-serif;
+Arial,
+sans-serif;
 }
 
-.container{width:min(92%,1080px);margin:auto}
+.container{
+width:min(92%,1080px);
+margin:auto;
+}
 
 nav{
-height:82px;
+height:80px;
 display:flex;
 align-items:center;
 justify-content:space-between;
@@ -54,78 +62,83 @@ font-weight:700;
 letter-spacing:-1px;
 }
 
-.logo span{color:#a77aff}
+.logo span{
+color:#a77aff;
+}
 
 .nav-actions{
 display:flex;
-align-items:center;
 gap:8px;
+align-items:center;
 }
 
-.glass-btn{
+.glass{
 color:white;
-border:1px solid rgba(255,255,255,.14);
+border:1px solid rgba(255,255,255,.13);
 background:linear-gradient(
 180deg,
-rgba(255,255,255,.13),
-rgba(255,255,255,.045)
+rgba(255,255,255,.12),
+rgba(255,255,255,.04)
 );
-backdrop-filter:blur(22px) saturate(150%);
--webkit-backdrop-filter:blur(22px) saturate(150%);
+backdrop-filter:blur(25px) saturate(150%);
+-webkit-backdrop-filter:blur(25px) saturate(150%);
 box-shadow:
-inset 0 1px 0 rgba(255,255,255,.12),
-0 8px 30px rgba(0,0,0,.25);
-cursor:pointer;
+inset 0 1px 0 rgba(255,255,255,.1),
+0 10px 35px rgba(0,0,0,.25);
 font-family:inherit;
+cursor:pointer;
 }
 
-.nav-btn{
-padding:10px 17px;
+.navbtn{
+padding:10px 16px;
 border-radius:14px;
 font-size:14px;
 }
 
-.lang-wrap{position:relative}
+.lang{
+position:relative;
+}
 
-.lang-btn{
+.langbtn{
 padding:10px 14px;
 border-radius:14px;
 font-size:13px;
 }
 
-.lang-menu{
+.langmenu{
+display:none;
 position:absolute;
 top:52px;
 right:0;
 width:140px;
 padding:7px;
-display:none;
-z-index:50;
-background:rgba(25,25,31,.82);
-border:1px solid rgba(255,255,255,.13);
 border-radius:18px;
-backdrop-filter:blur(30px) saturate(160%);
--webkit-backdrop-filter:blur(30px) saturate(160%);
-box-shadow:0 18px 50px rgba(0,0,0,.45);
+background:rgba(25,25,31,.85);
+border:1px solid rgba(255,255,255,.13);
+backdrop-filter:blur(30px);
+-webkit-backdrop-filter:blur(30px);
+z-index:100;
 }
 
-.lang-menu.show{display:block}
+.langmenu.show{
+display:block;
+}
 
-.lang-option{
+.langoption{
 width:100%;
 padding:11px;
 border:0;
+border-radius:12px;
 background:transparent;
 color:#ddd;
-border-radius:12px;
 font-family:inherit;
 text-align:start;
 cursor:pointer;
 }
 
-.lang-option:hover,
-.lang-option.active{
-background:rgba(155,108,255,.14);
+.langoption:hover,
+.langoption.active{
+background:rgba(155,108,255,.15);
 color:#b99aff;
 }
 
@@ -133,30 +146,34 @@ color:#b99aff;
 
 .hero{
 text-align:center;
-padding:75px 0 55px;
+padding:70px 0 55px;
 }
 
 .badge{
-display:inline-flex;
+display:inline-block;
 padding:9px 15px;
 border-radius:100px;
-color:#c4a8ff;
 font-size:13px;
-background:rgba(155,108,255,.09);
+color:#c5aaff;
+background:rgba(155,108,255,.08);
 border:1px solid rgba(155,108,255,.2);
 backdrop-filter:blur(20px);
 }
 
 h1{
 margin:22px auto 18px;
-max-width:800px;
-font-size:clamp(43px,8vw,74px);
+font-size:clamp(43px,8vw,72px);
 line-height:1.05;
 letter-spacing:-3px;
 }
 
 .gradient{
-background:linear-gradient(110deg,#fff,#d4c0ff,#9866ff);
+background:linear-gradient(
+110deg,
+#fff,
+#d4c0ff,
+#9866ff
+);
 -webkit-background-clip:text;
 background-clip:text;
 color:transparent;
@@ -170,99 +187,12 @@ font-size:16px;
 line-height:1.8;
 }
 
-.main-btn{
-margin-top:28px;
-padding:15px 28px;
-border-radius:17px;
-font-size:15px;
-font-weight:600;
-background:linear-gradient(
-180deg,
-rgba(174,139,255,.55),
-rgba(103,57,190,.38)
-);
-}
-
-/* FEATURES */
-
-.section-title{
-text-align:center;
-margin:45px 0 25px;
-}
-
-.section-title h2{
-margin:0 0 8px;
-font-size:27px;
-}
-
-.section-title p{
-margin:0;
-color:#777780;
-}
-
-.features{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:14px;
-}
-
-.card{
-min-height:180px;
-padding:24px;
-border-radius:25px;
-background:linear-gradient(
-145deg,
-rgba(255,255,255,.095),
-rgba(255,255,255,.035)
-);
-border:1px solid var(--border);
-backdrop-filter:blur(28px) saturate(150%);
--webkit-backdrop-filter:blur(28px) saturate(150%);
-box-shadow:
-inset 0 1px 0 rgba(255,255,255,.1),
-0 18px 50px rgba(0,0,0,.2);
-}
-
-.icon{
-width:43px;
-height:43px;
-border-radius:14px;
-background:rgba(155,108,255,.1);
-border:1px solid rgba(155,108,255,.18);
-margin-bottom:20px;
-position:relative;
-}
-
-.icon:after{
-content:"";
-position:absolute;
-width:9px;
-height:9px;
-border-radius:50%;
-background:#a77aff;
-box-shadow:0 0 18px #9b6cff;
-top:16px;
-left:16px;
-}
-
-.card h3{
-margin:0 0 9px;
-font-size:17px;
-}
-
-.card p{
-margin:0;
-color:#888891;
-line-height:1.7;
-font-size:14px;
-}
-
 /* GENERATOR */
 
 .generator{
-margin:65px 0;
+margin:20px 0 70px;
 padding:25px;
-border-radius:29px;
+border-radius:30px;
 background:linear-gradient(
 145deg,
 rgba(255,255,255,.09),
@@ -273,94 +203,149 @@ backdrop-filter:blur(30px) saturate(150%);
 -webkit-backdrop-filter:blur(30px) saturate(150%);
 box-shadow:
 inset 0 1px 0 rgba(255,255,255,.1),
-0 25px 70px rgba(0,0,0,.28);
+0 25px 70px rgba(0,0,0,.3);
 }
 
-.generator-title{
-margin-bottom:20px;
-}
-
-.generator-title h2{
+.generator h2{
 margin:0 0 7px;
 font-size:24px;
 }
 
-.generator-title p{
-margin:0;
+.generator-desc{
+margin:0 0 25px;
 color:#777780;
 font-size:14px;
 }
 
+/* FORM */
+
+.formgrid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:13px;
+}
+
+.field{
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.field.full{
+grid-column:1/-1;
+}
+
+label{
+font-size:13px;
+color:#aaaab2;
+}
+
+select,
 textarea{
 width:100%;
-min-height:150px;
-resize:vertical;
 border:1px solid rgba(255,255,255,.1);
 outline:none;
-border-radius:20px;
-padding:18px;
-background:rgba(0,0,0,.2);
+border-radius:17px;
+background:rgba(0,0,0,.22);
 color:white;
+padding:14px;
 font-family:inherit;
-font-size:15px;
+font-size:14px;
+}
+
+select option{
+background:#17171c;
+color:white;
+}
+
+textarea{
+min-height:135px;
+resize:vertical;
 line-height:1.7;
 }
 
-textarea::placeholder{color:#66666e}
-
-.generate-row{
-display:flex;
-justify-content:flex-start;
-margin-top:12px;
+textarea::placeholder{
+color:#606068;
 }
 
-.generate-btn{
-padding:14px 23px;
-border-radius:15px;
+.generate{
+width:100%;
+margin-top:15px;
+padding:15px;
+border-radius:17px;
+font-size:15px;
 font-weight:600;
-font-size:14px;
 background:linear-gradient(
 180deg,
-rgba(174,139,255,.55),
-rgba(103,57,190,.38)
+rgba(174,139,255,.58),
+rgba(103,57,190,.4)
 );
 }
 
+.generate:disabled{
+opacity:.55;
+cursor:not-allowed;
+}
+
+/* RESULT */
+
 .loading{
 display:none;
-margin-top:18px;
+text-align:center;
+padding:20px;
 color:#a98aff;
 font-size:13px;
 }
 
-.result{
+.resultbox{
 display:none;
 margin-top:18px;
 padding:20px;
 border-radius:20px;
 background:rgba(0,0,0,.2);
 border:1px solid rgba(255,255,255,.08);
-white-space:pre-wrap;
-line-height:1.8;
+}
+
+.resulttop{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+}
+
+.resulttop strong{
 font-size:14px;
 }
 
+.copy{
+padding:8px 12px;
+border-radius:11px;
+font-size:12px;
+}
+
+.result{
+white-space:pre-wrap;
+line-height:1.85;
+font-size:14px;
+color:#ddd;
+}
+
 .error{
-color:#ff8d9a;
+color:#ff929d;
 }
 
 /* FOOTER */
 
 footer{
+border-top:1px solid rgba(255,255,255,.07);
 margin-top:70px;
 padding:35px 0 45px;
 text-align:center;
-border-top:1px solid rgba(255,255,255,.07);
-color:#66666f;
 font-size:12px;
+color:#66666f;
 }
 
-.footer-brand{
+.footerbrand{
 color:#aaa;
 font-weight:600;
 margin-bottom:7px;
@@ -370,30 +355,33 @@ margin-bottom:7px;
 
 @media(max-width:700px){
 
-.container{width:90%}
+.container{
+width:90%;
+}
 
-nav{height:72px}
+nav{
+height:72px;
+}
 
-.nav-btn{padding:9px 13px}
+.navbtn{
+padding:9px 13px;
+}
 
-.lang-btn{padding:9px 11px}
+.langbtn{
+padding:9px 11px;
+}
 
-.hero{padding:55px 0 45px}
+.hero{
+padding:55px 0 45px;
+}
 
 h1{
 font-size:45px;
 letter-spacing:-2.5px;
 }
 
-.hero p{font-size:15px}
-
-.features{
-grid-template-columns:1fr;
-}
-
-.card{
-min-height:auto;
-padding:22px;
+.hero p{
+font-size:15px;
 }
 
 .generator{
@@ -401,13 +389,14 @@ padding:18px;
 border-radius:25px;
 }
 
-.generate-row{
-width:100%;
+.formgrid{
+grid-template-columns:1fr;
 }
 
-.generate-btn{
-width:100%;
+.field.full{
+grid-column:auto;
 }
+
 }
 </style>
 </head>
@@ -418,30 +407,34 @@ width:100%;
 
 <nav>
 
-<div class="logo">Biz<span>AI</span></div>
+<div class="logo">
+Biz<span>AI</span>
+</div>
 
 <div class="nav-actions">
 
-<div class="lang-wrap">
+<div class="lang">
 
 <button
-class="glass-btn lang-btn"
+class="glass langbtn"
 onclick="toggleLang()"
-id="langButton">
+id="langBtn">
 العربية
 </button>
 
-<div class="lang-menu" id="langMenu">
+<div
+class="langmenu"
+id="langMenu">
 
 <button
-class="lang-option active"
+class="langoption active"
 onclick="setLang('ar')"
 id="arOption">
 العربية
 </button>
 
 <button
-class="lang-option"
+class="langoption"
 onclick="setLang('en')"
 id="enOption">
 English
@@ -452,8 +445,8 @@ English
 </div>
 
 <button
-class="glass-btn nav-btn"
-onclick="scrollToGenerator()"
+class="glass navbtn"
+onclick="goGenerator()"
 id="navStart">
 ابدأ الآن
 </button>
@@ -469,128 +462,178 @@ id="navStart">
 </div>
 
 <h1 id="heroTitle">
-ابنِ مشروعك <span class="gradient">بذكاء</span>
+اصنع محتواك <span class="gradient">بذكاء</span>
 </h1>
 
 <p id="heroText">
-أدوات ذكية تساعدك على بناء علامتك التجارية،
-صناعة المحتوى، وتحسين حضورك الرقمي من مكان واحد.
+أنشئ محتوى احترافي لمشروعك خلال ثوانٍ باستخدام الذكاء الاصطناعي.
 </p>
-
-<button
-class="glass-btn main-btn"
-onclick="scrollToGenerator()"
-id="heroButton">
-ابدأ مجاناً
-</button>
 
 </section>
 
-<div class="section-title">
-
-<h2 id="sectionTitle">كل أدوات مشروعك</h2>
-
-<p id="sectionText">
-بسيطة، سريعة، ومصممة لتشتغل معك.
-</p>
-
-</div>
-
-<section class="features">
-
-<div class="card">
-<div class="icon"></div>
-<h3 id="card1Title">صناعة المحتوى</h3>
-<p id="card1Text">
-أنشئ منشورات وأفكار فيديوهات وإعلانات تناسب مشروعك.
-</p>
-</div>
-
-<div class="card">
-<div class="icon"></div>
-<h3 id="card2Title">تحليل الحساب</h3>
-<p id="card2Text">
-اكتشف نقاط القوة والضعف في حضورك على منصات التواصل.
-</p>
-</div>
-
-<div class="card">
-<div class="icon"></div>
-<h3 id="card3Title">هوية العلامة</h3>
-<p id="card3Text">
-أنشئ هوية متناسقة من الاسم إلى الألوان والوصف.
-</p>
-</div>
-
-<div class="card">
-<div class="icon"></div>
-<h3 id="card4Title">صفحة مشروع</h3>
-<p id="card4Text">
-أنشئ صفحة تعريف احترافية لمشروعك خلال دقائق.
-</p>
-</div>
-
-<div class="card">
-<div class="icon"></div>
-<h3 id="card5Title">خطة محتوى</h3>
-<p id="card5Text">
-احصل على خطة نشر منظمة تساعدك على الاستمرار.
-</p>
-</div>
-
-<div class="card">
-<div class="icon"></div>
-<h3 id="card6Title">أفكار تسويقية</h3>
-<p id="card6Text">
-اكتشف طرقاً جديدة لجذب العملاء وتنمية مشروعك.
-</p>
-</div>
-
-</section>
-
-<!-- AI GENERATOR -->
-
-<section class="generator" id="generator">
-
-<div class="generator-title">
+<section
+class="generator"
+id="generator">
 
 <h2 id="generatorTitle">
-مولّد المحتوى بالذكاء الاصطناعي
+مولّد المحتوى
 </h2>
 
-<p id="generatorText">
-اكتب ما تريد، وBizAI سيجهز لك المحتوى.
+<p
+class="generator-desc"
+id="generatorDesc">
+حدد احتياجاتك وسيقوم BizAI بإنشاء المحتوى المناسب لك.
 </p>
 
+<div class="formgrid">
+
+<div class="field">
+
+<label id="platformLabel">
+المنصة
+</label>
+
+<select id="platform">
+
+<option value="Instagram">Instagram</option>
+<option value="TikTok">TikTok</option>
+<option value="Facebook">Facebook</option>
+<option value="LinkedIn">LinkedIn</option>
+<option value="X">X</option>
+
+</select>
+
 </div>
+
+<div class="field">
+
+<label id="typeLabel">
+نوع المحتوى
+</label>
+
+<select id="type">
+
+<option value="Posts">منشورات</option>
+<option value="Captions">كابشن</option>
+<option value="Ads">إعلانات</option>
+<option value="Video Scripts">سكريبت فيديو</option>
+<option value="Product Description">وصف منتج</option>
+
+</select>
+
+</div>
+
+<div class="field">
+
+<label id="toneLabel">
+نبرة الكتابة
+</label>
+
+<select id="tone">
+
+<option value="Professional">احترافية</option>
+<option value="Friendly">ودية</option>
+<option value="Luxury">فاخرة</option>
+<option value="Persuasive">إقناعية</option>
+<option value="Simple">بسيطة</option>
+
+</select>
+
+</div>
+
+<div class="field">
+
+<label id="languageLabel">
+لغة المحتوى
+</label>
+
+<select id="contentLanguage">
+
+<option value="Arabic">العربية</option>
+<option value="English">English</option>
+
+</select>
+
+</div>
+
+<div class="field">
+
+<label id="countLabel">
+عدد النتائج
+</label>
+
+<select id="count">
+
+<option value="1">1</option>
+<option value="3">3</option>
+<option value="5">5</option>
+<option value="10">10</option>
+
+</select>
+
+</div>
+
+<div class="field full">
+
+<label id="detailsLabel">
+تفاصيل المحتوى
+</label>
 
 <textarea
 id="prompt"
-placeholder="مثال: اكتب لي 5 منشورات لمحل ملابس نسائية في ألمانيا..."
-></textarea>
+placeholder="مثال: عندي متجر ملابس رجالية وأريد منشورات تجذب العملاء في ألمانيا...">
+</textarea>
 
-<div class="generate-row">
+</div>
+
+</div>
 
 <button
-class="glass-btn generate-btn"
+class="glass generate"
 onclick="generateContent()"
-id="generateButton">
+id="generateBtn">
 إنشاء المحتوى
+</button>
+
+<div
+class="loading"
+id="loading">
+جاري إنشاء المحتوى...
+</div>
+
+<div
+class="resultbox"
+id="resultBox">
+
+<div class="resulttop">
+
+<strong id="resultTitle">
+النتيجة
+</strong>
+
+<button
+class="glass copy"
+onclick="copyResult()"
+id="copyBtn">
+نسخ
 </button>
 
 </div>
 
-<div class="loading" id="loading">
-جاري إنشاء المحتوى...
+<div
+class="result"
+id="result">
 </div>
 
-<div class="result" id="result"></div>
+</div>
 
 </section>
 
 <footer>
 
-<div class="footer-brand">BizAI</div>
+<div class="footerbrand">
+BizAI
+</div>
 
 <div id="copyright">
 © 2026 BizAI — جميع الحقوق محفوظة.
@@ -602,104 +645,125 @@ id="generateButton">
 
 <script>
 
-const translations={
+const T={
 
 ar:{
-language:"العربية",
-navStart:"ابدأ الآن",
+lang:"العربية",
+nav:"ابدأ الآن",
 badge:"مساعد الأعمال الذكي",
-heroTitle:'ابنِ مشروعك <span class="gradient">بذكاء</span>',
-heroText:"أدوات ذكية تساعدك على بناء علامتك التجارية، صناعة المحتوى، وتحسين حضورك الرقمي من مكان واحد.",
-heroButton:"ابدأ مجاناً",
-sectionTitle:"كل أدوات مشروعك",
-sectionText:"بسيطة، سريعة، ومصممة لتشتغل معك.",
-card1Title:"صناعة المحتوى",
-card1Text:"أنشئ منشورات وأفكار فيديوهات وإعلانات تناسب مشروعك.",
-card2Title:"تحليل الحساب",
-card2Text:"اكتشف نقاط القوة والضعف في حضورك على منصات التواصل.",
-card3Title:"هوية العلامة",
-card3Text:"أنشئ هوية متناسقة من الاسم إلى الألوان والوصف.",
-card4Title:"صفحة مشروع",
-card4Text:"أنشئ صفحة تعريف احترافية لمشروعك خلال دقائق.",
-card5Title:"خطة محتوى",
-card5Text:"احصل على خطة نشر منظمة تساعدك على الاستمرار.",
-card6Title:"أفكار تسويقية",
-card6Text:"اكتشف طرقاً جديدة لجذب العملاء وتنمية مشروعك.",
-generatorTitle:"مولّد المحتوى بالذكاء الاصطناعي",
-generatorText:"اكتب ما تريد، وBizAI سيجهز لك المحتوى.",
-placeholder:"مثال: اكتب لي 5 منشورات لمحل ملابس نسائية في ألمانيا...",
-generateButton:"إنشاء المحتوى",
+hero:"اصنع محتواك <span class='gradient'>بذكاء</span>",
+heroText:"أنشئ محتوى احترافي لمشروعك خلال ثوانٍ باستخدام الذكاء الاصطناعي.",
+title:"مولّد المحتوى",
+desc:"حدد احتياجاتك وسيقوم BizAI بإنشاء المحتوى المناسب لك.",
+platform:"المنصة",
+type:"نوع المحتوى",
+tone:"نبرة الكتابة",
+language:"لغة المحتوى",
+count:"عدد النتائج",
+details:"تفاصيل المحتوى",
+placeholder:"مثال: عندي متجر ملابس رجالية وأريد منشورات تجذب العملاء في ألمانيا...",
+generate:"إنشاء المحتوى",
 loading:"جاري إنشاء المحتوى...",
+result:"النتيجة",
+copy:"نسخ",
+copied:"تم النسخ",
 copyright:"© 2026 BizAI — جميع الحقوق محفوظة."
 },
 
 en:{
-language:"English",
-navStart:"Get Started",
+lang:"English",
+nav:"Get Started",
 badge:"Your AI Business Assistant",
-heroTitle:'Build your business <span class="gradient">smarter</span>',
-heroText:"Smart tools to build your brand, create content, and improve your digital presence — all in one place.",
-heroButton:"Start Free",
-sectionTitle:"Everything Your Business Needs",
-sectionText:"Simple, fast, and designed to work with you.",
-card1Title:"Content Creation",
-card1Text:"Create posts, video ideas, and ads tailored to your business.",
-card2Title:"Account Analysis",
-card2Text:"Discover the strengths and weaknesses of your social presence.",
-card3Title:"Brand Identity",
-card3Text:"Build a consistent identity from your name to your colors and description.",
-card4Title:"Business Page",
-card4Text:"Create a professional landing page for your business in minutes.",
-card5Title:"Content Plan",
-card5Text:"Get an organized publishing plan that keeps you consistent.",
-card6Title:"Marketing Ideas",
-card6Text:"Discover new ways to attract customers and grow your business.",
-generatorTitle:"AI Content Generator",
-generatorText:"Tell us what you need and BizAI will create it for you.",
-placeholder:"Example: Write 5 Instagram posts for a women's clothing store in Germany...",
-generateButton:"Generate Content",
+hero:"Create content <span class='gradient'>smarter</span>",
+heroText:"Create professional content for your business in seconds using AI.",
+title:"AI Content Generator",
+desc:"Choose your preferences and BizAI will create the right content for you.",
+platform:"Platform",
+type:"Content Type",
+tone:"Writing Tone",
+language:"Content Language",
+count:"Number of Results",
+details:"Content Details",
+placeholder:"Example: I own a men's clothing store and want posts that attract customers in Germany...",
+generate:"Generate Content",
 loading:"Creating your content...",
+result:"Result",
+copy:"Copy",
+copied:"Copied",
 copyright:"© 2026 BizAI — All rights reserved."
 }
 
 };
 
 function toggleLang(){
-document.getElementById("langMenu").classList.toggle("show");
+
+document
+.getElementById("langMenu")
+.classList.toggle("show");
+
 }
 
 function setLang(lang){
 
-const t=translations[lang];
+const t=T[lang];
 
 document.documentElement.lang=lang;
-document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+document.documentElement.dir=
+lang==="ar"?"rtl":"ltr";
 
-Object.keys(t).forEach(key=>{
+document.getElementById("langBtn").textContent=t.lang;
+document.getElementById("navStart").textContent=t.nav;
+document.getElementById("badge").textContent=t.badge;
+document.getElementById("heroTitle").innerHTML=t.hero;
+document.getElementById("heroText").textContent=t.heroText;
 
-const el=document.getElementById(key);
+document.getElementById("generatorTitle").textContent=t.title;
+document.getElementById("generatorDesc").textContent=t.desc;
 
-if(el){
-if(key==="heroTitle") el.innerHTML=t[key];
-else el.textContent=t[key];
-}
-
-});
-
-document.getElementById("langButton").textContent=t.language;
-document.getElementById("arOption").classList.toggle("active",lang==="ar");
-document.getElementById("enOption").classList.toggle("active",lang==="en");
+document.getElementById("platformLabel").textContent=t.platform;
+document.getElementById("typeLabel").textContent=t.type;
+document.getElementById("toneLabel").textContent=t.tone;
+document.getElementById("languageLabel").textContent=t.language;
+document.getElementById("countLabel").textContent=t.count;
+document.getElementById("detailsLabel").textContent=t.details;
 
 document.getElementById("prompt").placeholder=t.placeholder;
+document.getElementById("generateBtn").textContent=t.generate;
+document.getElementById("loading").textContent=t.loading;
+document.getElementById("resultTitle").textContent=t.result;
+document.getElementById("copyBtn").textContent=t.copy;
+document.getElementById("copyright").textContent=t.copyright;
 
-document.getElementById("langMenu").classList.remove("show");
+document
+.getElementById("arOption")
+.classList.toggle(
+"active",
+lang==="ar"
+);
 
-localStorage.setItem("bizai-language",lang);
+document
+.getElementById("enOption")
+.classList.toggle(
+"active",
+lang==="en"
+);
+
+document
+.getElementById("langMenu")
+.classList.remove("show");
+
+localStorage.setItem(
+"bizai-language",
+lang
+);
+
 }
 
-function scrollToGenerator(){
+function goGenerator(){
 
-document.getElementById("generator").scrollIntoView({
+document
+.getElementById("generator")
+.scrollIntoView({
 behavior:"smooth"
 });
 
@@ -707,32 +771,99 @@ behavior:"smooth"
 
 async function generateContent(){
 
-const prompt=document.getElementById("prompt").value.trim();
-const result=document.getElementById("result");
-const loading=document.getElementById("loading");
-const button=document.getElementById("generateButton");
+const details=
+document
+.getElementById("prompt")
+.value
+.trim();
 
-if(!prompt){
+const resultBox=
+document.getElementById("resultBox");
 
-result.style.display="block";
+const result=
+document.getElementById("result");
+
+const loading=
+document.getElementById("loading");
+
+const button=
+document.getElementById("generateBtn");
+
+const lang=
+document.documentElement.lang;
+
+if(!details){
+
+resultBox.style.display="block";
+
 result.className="result error";
+
 result.textContent=
-document.documentElement.lang==="en"
-?"Please write your request first."
-:"اكتب طلبك أولاً.";
+lang==="en"
+?"Please enter your content details first."
+:"اكتب تفاصيل المحتوى أولاً.";
 
 return;
+
 }
 
-result.style.display="none";
-result.className="result";
+const platform=
+document.getElementById("platform").value;
+
+const type=
+document.getElementById("type").value;
+
+const tone=
+document.getElementById("tone").value;
+
+const contentLanguage=
+document.getElementById("contentLanguage").value;
+
+const count=
+document.getElementById("count").value;
+
+const finalPrompt=`
+
+Create ${count} ${type}
+for ${platform}.
+
+Writing tone:
+${tone}
+
+Content language:
+${contentLanguage}
+
+User's business/details:
+${details}
+
+IMPORTANT:
+
+Return ONLY the finished content.
+
+Do not add explanations.
+
+Do not add marketing notes.
+
+Do not say "here is your content".
+
+Do not add a "BizAI note".
+
+Do not use emojis unless specifically requested.
+
+Make every result ready to copy and publish.
+
+`;
+
+resultBox.style.display="none";
 loading.style.display="block";
 button.disabled=true;
 
 try{
 
-const response=await fetch("/api/generate",{
-
+const response=
+await fetch(
+"/api/generate",
+{
 method:"POST",
 
 headers:{
@@ -740,29 +871,37 @@ headers:{
 },
 
 body:JSON.stringify({
-prompt:prompt
+prompt:finalPrompt
 })
 
 });
 
-const data=await response.json();
+const data=
+await response.json();
 
 if(!response.ok){
-throw new Error(data.error || "Request failed");
+
+throw new Error(
+data.error ||
+"Request failed"
+);
+
 }
 
 result.textContent=data.result;
-result.style.display="block";
+result.className="result";
+resultBox.style.display="block";
 
 }catch(error){
 
 result.className="result error";
+
 result.textContent=
-document.documentElement.lang==="en"
+lang==="en"
 ?"Something went wrong: "+error.message
 :"حدث خطأ: "+error.message;
 
-result.style.display="block";
+resultBox.style.display="block";
 
 }finally{
 
@@ -773,17 +912,77 @@ button.disabled=false;
 
 }
 
-document.addEventListener("click",(event)=>{
+async function copyResult(){
 
-const wrap=document.querySelector(".lang-wrap");
+const text=
+document
+.getElementById("result")
+.textContent;
 
-if(!wrap.contains(event.target)){
-document.getElementById("langMenu").classList.remove("show");
+if(!text)return;
+
+try{
+
+await navigator.clipboard.writeText(text);
+
+}catch{
+
+const area=document.createElement("textarea");
+
+area.value=text;
+
+document.body.appendChild(area);
+
+area.select();
+
+document.execCommand("copy");
+
+area.remove();
+
+}
+
+const btn=
+document.getElementById("copyBtn");
+
+const lang=
+document.documentElement.lang;
+
+btn.textContent=
+lang==="en"
+?"Copied"
+:"تم النسخ";
+
+setTimeout(()=>{
+
+btn.textContent=
+lang==="en"
+?"Copy"
+:"نسخ";
+
+},1500);
+
+}
+
+document.addEventListener(
+"click",
+function(e){
+
+const lang=
+document.querySelector(".lang");
+
+if(!lang.contains(e.target)){
+
+document
+.getElementById("langMenu")
+.classList.remove("show");
+
 }
 
 });
 
-setLang(localStorage.getItem("bizai-language")||"ar");
+setLang(
+localStorage.getItem("bizai-language") || "ar"
+);
 
 </script>
 
