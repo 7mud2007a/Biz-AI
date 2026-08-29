@@ -26,7 +26,7 @@ app.post("/api/generate", async (req, res) => {
         }
 
         const response = await fetch(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent",
             {
                 method: "POST",
                 headers: {
@@ -42,11 +42,14 @@ app.post("/api/generate", async (req, res) => {
                                     text: `أنت مساعد تسويق احترافي لمنصة BizAI.
 
 مهمتك إنشاء محتوى مفيد واحترافي بناءً على طلب المستخدم.
-اكتب باللغة التي يستخدمها المستخدم.
+
+اكتب باللغة المطلوبة من المستخدم.
 لا تستخدم الإيموجي إلا إذا طلب المستخدم ذلك.
 اجعل النتيجة منظمة وسهلة النسخ والاستخدام.
+لا تضف أي شرح خارج المحتوى المطلوب.
 
 طلب المستخدم:
+
 ${prompt}`
                                 }
                             ]
