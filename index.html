@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BizAI — مساعد أعمالك الذكي</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#07070b;
+    color:#fff;
+}
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 0;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#9b5cff;
+}
+
+.nav-btn{
+    background:#9b5cff;
+    border:0;
+    color:white;
+    padding:11px 18px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.hero{
+    text-align:center;
+    padding:65px 0 45px;
+}
+
+.badge{
+    display:inline-block;
+    background:#15101f;
+    color:#b98aff;
+    border:1px solid #34204e;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:clamp(38px,8vw,70px);
+    margin:0 auto 20px;
+    max-width:800px;
+    line-height:1.05;
+}
+
+.gradient{
+    background:linear-gradient(90deg,#fff,#a86cff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:#999;
+    max-width:600px;
+    margin:auto;
+    line-height:1.8;
+    font-size:16px;
+}
+
+.main-btn{
+    margin-top:28px;
+    background:#9b5cff;
+    color:white;
+    border:0;
+    padding:15px 28px;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 0 35px #7d3cff33;
+}
+
+.section-title{
+    text-align:center;
+    margin:55px 0 25px;
+}
+
+.section-title h2{
+    margin-bottom:8px;
+}
+
+.section-title p{
+    color:#777;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:#0d0d13;
+    border:1px solid #1b1b25;
+    border-radius:18px;
+    padding:23px;
+    transition:.2s;
+}
+
+.card:hover{
+    border-color:#713dcc;
+    transform:translateY(-3px);
+}
+
+.icon{
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:#171020;
+    font-size:22px;
+    margin-bottom:18px;
+}
+
+.card h3{
+    margin:0 0 10px;
+}
+
+.card p{
+    color:#888;
+    line-height:1.7;
+    font-size:14px;
+}
+
+.dashboard{
+    margin:60px auto;
+    background:#0c0c12;
+    border:1px solid #20202b;
+    border-radius:24px;
+    padding:22px;
+}
+
+.dashboard-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.status{
+    color:#9b5cff;
+    font-size:13px;
+}
+
+.tools{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.tool{
+    background:#12121a;
+    border:1px solid #20202b;
+    padding:18px;
+    border-radius:15px;
+}
+
+.tool strong{
+    display:block;
+    margin-bottom:7px;
+}
+
+.tool span{
+    color:#777;
+    font-size:13px;
+}
+
+footer{
+    text-align:center;
+    color:#555;
+    padding:35px 0;
+    font-size:13px;
+}
+
+@media(max-width:600px){
+    .hero{padding-top:40px}
+    .tools{grid-template-columns:1fr}
+    h1{font-size:42px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+    <div class="logo">Biz<span>AI</span></div>
+    <button class="nav-btn" onclick="start()">ابدأ الآن</button>
+</nav>
+
+<section class="hero">
+
+    <div class="badge">✦ مساعدك الذكي للأعمال</div>
+
+    <h1>
+        حوّل فكرتك إلى
+        <span class="gradient">مشروع أقوى</span>
+    </h1>
+
+    <p>
+        أدوات ذكية تساعدك على التسويق، صناعة المحتوى،
+        تحليل حساباتك، وبناء حضور احترافي لمشروعك.
+    </p>
+
+    <button class="main-btn" onclick="start()">
+        ابدأ مشروعك مجاناً →
+    </button>
+
+</section>
+
+<div class="section-title">
+    <h2>كل أدوات مشروعك بمكان واحد</h2>
+    <p>بدون تعقيد، وبدون عشرات المواقع.</p>
+</div>
+
+<section class="features">
+
+    <div class="card">
+        <div class="icon">🤖</div>
+        <h3>مولّد المحتوى</h3>
+        <p>أنشئ منشورات، أفكار Reels، إعلانات وكتابات تسويقية.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">📊</div>
+        <h3>تحليل الحساب</h3>
+        <p>حلّل حضورك على السوشيال ميديا واكتشف نقاط الضعف.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🎨</div>
+        <h3>هوية مشروعك</h3>
+        <p>اقتراح أسماء، ألوان، Bio وهوية بصرية لمشروعك.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🌐</div>
+        <h3>صفحة مشروع</h3>
+        <p>أنشئ صفحة احترافية لمشروعك خلال دقائق.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">📅</div>
+        <h3>خطة محتوى</h3>
+        <p>احصل على خطة نشر منظمة لأيام وأسابيع قادمة.</p>
+    </div>
+
+    <div class="card">
+        <div class="icon">💡</div>
+        <h3>أفكار تسويقية</h3>
+        <p>احصل على أفكار جديدة تساعدك في جذب العملاء.</p>
+    </div>
+
+</section>
+
+<section class="dashboard" id="dashboard">
+
+    <div class="dashboard-top">
+        <div>
+            <h2 style="margin:0">لوحة التحكم</h2>
+            <small style="color:#777">مشروعك في مكان واحد</small>
+        </div>
+
+        <div class="status">● جاهز</div>
+    </div>
+
+    <div class="tools">
+
+        <div class="tool">
+            <strong>🤖 إنشاء محتوى</strong>
+            <span>منشورات وإعلانات وأفكار</span>
+        </div>
+
+        <div class="tool">
+            <strong>📊 تحليل الحساب</strong>
+            <span>تحليل الأداء والمنافسين</span>
+        </div>
+
+        <div class="tool">
+            <strong>🎨 Brand Kit</strong>
+            <span>ألوان وهوية مشروعك</span>
+        </div>
+
+        <div class="tool">
+            <strong>🌐 إنشاء صفحة</strong>
+            <span>Landing Page لمشروعك</span>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 BizAI — جميع الحقوق محفوظة
+</footer>
+
+</div>
+
+<script>
+function start(){
+    document.getElementById("dashboard").scrollIntoView({
+        behavior:"smooth"
+    });
+}
+</script>
+
+</body>
+</html>
