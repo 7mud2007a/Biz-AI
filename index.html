@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>BizAI</title>
 
@@ -11,13 +11,11 @@
 
 :root{
     --bg:#050507;
-    --glass:rgba(255,255,255,.065);
-    --glass-strong:rgba(255,255,255,.095);
-    --border:rgba(255,255,255,.11);
     --text:#f5f5f7;
     --muted:#92929a;
     --purple:#9b6cff;
-    --purple2:#6f42d8;
+    --border:rgba(255,255,255,.12);
+    --glass:rgba(255,255,255,.065);
 }
 
 *{
@@ -37,6 +35,7 @@ body{
         radial-gradient(circle at 50% -10%,#39206d 0,transparent 35%),
         radial-gradient(circle at 100% 40%,#1a1232 0,transparent 25%),
         var(--bg);
+
     font-family:
         "SF Pro Display",
         "SF Pro Text",
@@ -47,10 +46,10 @@ body{
         "Segoe UI",
         Arial,
         sans-serif;
+
     overflow-x:hidden;
 }
 
-/* خلفية ضبابية */
 body::before{
     content:"";
     position:fixed;
@@ -70,6 +69,7 @@ body::before{
 }
 
 /* NAV */
+
 nav{
     height:82px;
     display:flex;
@@ -87,22 +87,39 @@ nav{
     color:#a77aff;
 }
 
-.nav-btn,
-.main-btn{
-    border:1px solid rgba(255,255,255,.14);
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+/* GLASS BUTTON */
+
+.glass-btn{
     color:white;
+    border:1px solid rgba(255,255,255,.14);
     background:
         linear-gradient(
             180deg,
-            rgba(255,255,255,.14),
-            rgba(255,255,255,.055)
+            rgba(255,255,255,.13),
+            rgba(255,255,255,.045)
         );
+
     backdrop-filter:blur(22px) saturate(150%);
     -webkit-backdrop-filter:blur(22px) saturate(150%);
+
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,.12),
         0 8px 30px rgba(0,0,0,.25);
+
     cursor:pointer;
+}
+
+.lang-button{
+    min-width:86px;
+    padding:10px 13px;
+    border-radius:14px;
+    font-size:13px;
 }
 
 .nav-btn{
@@ -111,7 +128,80 @@ nav{
     font-size:14px;
 }
 
+/* LANGUAGE MENU */
+
+.language-wrap{
+    position:relative;
+}
+
+.language-menu{
+    position:absolute;
+    top:52px;
+    right:0;
+    width:145px;
+    padding:7px;
+
+    display:none;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35,35,42,.88),
+            rgba(15,15,20,.78)
+        );
+
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:18px;
+
+    backdrop-filter:blur(30px) saturate(160%);
+    -webkit-backdrop-filter:blur(30px) saturate(160%);
+
+    box-shadow:
+        0 18px 50px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.10);
+
+    z-index:100;
+}
+
+.language-menu.show{
+    display:block;
+    animation:menuIn .18s ease;
+}
+
+@keyframes menuIn{
+    from{
+        opacity:0;
+        transform:translateY(-6px) scale(.97);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.language-option{
+    width:100%;
+    padding:11px 12px;
+    border:0;
+    border-radius:12px;
+    background:transparent;
+    color:#ddd;
+    text-align:start;
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.language-option:hover{
+    background:rgba(255,255,255,.08);
+}
+
+.language-option.active{
+    background:rgba(155,108,255,.15);
+    color:#b99aff;
+}
+
 /* HERO */
+
 .hero{
     text-align:center;
     padding:75px 0 60px;
@@ -119,13 +209,15 @@ nav{
 
 .badge{
     display:inline-flex;
-    align-items:center;
     padding:9px 15px;
     border-radius:100px;
+
     color:#c4a8ff;
     font-size:13px;
+
     background:rgba(155,108,255,.09);
     border:1px solid rgba(155,108,255,.2);
+
     backdrop-filter:blur(20px);
     -webkit-backdrop-filter:blur(20px);
 }
@@ -133,6 +225,7 @@ nav{
 h1{
     margin:22px auto 18px;
     max-width:800px;
+
     font-size:clamp(43px,8vw,74px);
     line-height:1.05;
     letter-spacing:-3px;
@@ -146,6 +239,7 @@ h1{
         #d4c0ff 45%,
         #9866ff 90%
     );
+
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
@@ -154,6 +248,7 @@ h1{
 .hero p{
     max-width:620px;
     margin:auto;
+
     color:var(--muted);
     font-size:16px;
     line-height:1.8;
@@ -163,8 +258,10 @@ h1{
     margin-top:30px;
     padding:15px 27px;
     border-radius:17px;
+
     font-size:15px;
     font-weight:600;
+
     background:
         linear-gradient(
             180deg,
@@ -173,7 +270,8 @@ h1{
         );
 }
 
-/* SECTIONS */
+/* SECTION */
+
 .section-title{
     text-align:center;
     margin:45px 0 25px;
@@ -190,7 +288,8 @@ h1{
     color:#777780;
 }
 
-/* CARDS */
+/* FEATURES */
+
 .features{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -230,6 +329,7 @@ h1{
     width:43px;
     height:43px;
     border-radius:14px;
+
     display:flex;
     align-items:center;
     justify-content:center;
@@ -262,6 +362,7 @@ h1{
 }
 
 /* DASHBOARD */
+
 .dashboard{
     margin:70px 0 40px;
     padding:23px;
@@ -337,14 +438,27 @@ h1{
 }
 
 /* FOOTER */
+
 footer{
+    margin-top:80px;
     padding:35px 0 45px;
+
     text-align:center;
-    color:#55555d;
+
+    color:#66666f;
     font-size:12px;
+
+    border-top:1px solid rgba(255,255,255,.07);
+}
+
+.footer-brand{
+    color:#aaa;
+    font-weight:600;
+    margin-bottom:7px;
 }
 
 /* MOBILE */
+
 @media(max-width:700px){
 
     .container{
@@ -353,6 +467,19 @@ footer{
 
     nav{
         height:72px;
+    }
+
+    .nav-actions{
+        gap:6px;
+    }
+
+    .nav-btn{
+        padding:9px 13px;
+    }
+
+    .lang-button{
+        min-width:76px;
+        padding:9px 10px;
     }
 
     .hero{
@@ -386,17 +513,6 @@ footer{
         border-radius:25px;
     }
 }
-
-@media(prefers-reduced-motion:no-preference){
-    .card,
-    .tool,
-    button{
-        transition:
-            transform .25s ease,
-            background .25s ease,
-            border-color .25s ease;
-    }
-}
 </style>
 </head>
 
@@ -405,88 +521,142 @@ footer{
 <div class="container">
 
 <nav>
-    <div class="logo">Biz<span>AI</span></div>
-    <button class="nav-btn" onclick="start()">ابدأ الآن</button>
+
+    <div class="logo">
+        Biz<span>AI</span>
+    </div>
+
+    <div class="nav-actions">
+
+        <div class="language-wrap">
+
+            <button
+                class="glass-btn lang-button"
+                onclick="toggleLanguageMenu()"
+                id="languageButton"
+            >
+                العربية
+            </button>
+
+            <div class="language-menu" id="languageMenu">
+
+                <button
+                    class="language-option active"
+                    onclick="setLanguage('ar')"
+                    id="arOption"
+                >
+                    العربية
+                </button>
+
+                <button
+                    class="language-option"
+                    onclick="setLanguage('en')"
+                    id="enOption"
+                >
+                    English
+                </button>
+
+            </div>
+
+        </div>
+
+        <button
+            class="glass-btn nav-btn"
+            onclick="start()"
+            id="navStart"
+        >
+            ابدأ الآن
+        </button>
+
+    </div>
+
 </nav>
 
 <section class="hero">
 
-    <div class="badge">مساعد الأعمال الذكي</div>
+    <div class="badge" id="badge">
+        مساعد الأعمال الذكي
+    </div>
 
-    <h1>
+    <h1 id="heroTitle">
         ابنِ مشروعك
         <span class="gradient">بذكاء</span>
     </h1>
 
-    <p>
+    <p id="heroText">
         أدوات ذكية تساعدك على بناء علامتك التجارية،
         صناعة المحتوى، وتحسين حضورك الرقمي من مكان واحد.
     </p>
 
-    <button class="main-btn" onclick="start()">
+    <button
+        class="glass-btn main-btn"
+        onclick="start()"
+        id="heroButton"
+    >
         ابدأ مجاناً
     </button>
 
 </section>
 
 <div class="section-title">
-    <h2>كل أدوات مشروعك</h2>
-    <p>بسيطة، سريعة، ومصممة لتشتغل معك.</p>
+
+    <h2 id="sectionTitle">
+        كل أدوات مشروعك
+    </h2>
+
+    <p id="sectionText">
+        بسيطة، سريعة، ومصممة لتشتغل معك.
+    </p>
+
 </div>
 
 <section class="features">
 
     <div class="card">
         <div class="icon"></div>
-        <h3>صناعة المحتوى</h3>
-        <p>
-            أنشئ منشورات وأفكار فيديوهات وإعلانات
-            تناسب مشروعك.
+        <h3 id="card1Title">صناعة المحتوى</h3>
+        <p id="card1Text">
+            أنشئ منشورات وأفكار فيديوهات وإعلانات تناسب مشروعك.
         </p>
     </div>
 
     <div class="card">
         <div class="icon"></div>
-        <h3>تحليل الحساب</h3>
-        <p>
-            اكتشف نقاط القوة والضعف في حضورك
-            على منصات التواصل.
+        <h3 id="card2Title">تحليل الحساب</h3>
+        <p id="card2Text">
+            اكتشف نقاط القوة والضعف في حضورك على منصات التواصل.
         </p>
     </div>
 
     <div class="card">
         <div class="icon"></div>
-        <h3>هوية العلامة</h3>
-        <p>
-            أنشئ هوية متناسقة من الاسم إلى الألوان
-            والوصف.
+        <h3 id="card3Title">هوية العلامة</h3>
+        <p id="card3Text">
+            أنشئ هوية متناسقة من الاسم إلى الألوان والوصف.
         </p>
     </div>
 
     <div class="card">
         <div class="icon"></div>
-        <h3>صفحة مشروع</h3>
-        <p>
-            أنشئ صفحة تعريف احترافية لمشروعك
-            خلال دقائق.
+        <h3 id="card4Title">صفحة مشروع</h3>
+        <p id="card4Text">
+            أنشئ صفحة تعريف احترافية لمشروعك خلال دقائق.
         </p>
     </div>
 
     <div class="card">
         <div class="icon"></div>
-        <h3>خطة محتوى</h3>
-        <p>
-            احصل على خطة نشر منظمة تساعدك
-            على الاستمرار.
+        <h3 id="card5Title">خطة محتوى</h3>
+        <p id="card5Text">
+            احصل على خطة نشر منظمة تساعدك على الاستمرار.
         </p>
     </div>
 
     <div class="card">
         <div class="icon"></div>
-        <h3>أفكار تسويقية</h3>
-        <p>
-            اكتشف طرقاً جديدة لجذب العملاء
-            وتنمية مشروعك.
+        <h3 id="card6Title">أفكار تسويقية</h3>
+        <p id="card6Text">
+            اكتشف طرقاً جديدة لجذب العملاء وتنمية مشروعك.
         </p>
     </div>
 
@@ -495,34 +665,46 @@ footer{
 <section class="dashboard" id="dashboard">
 
     <div class="dashboard-top">
+
         <div>
-            <h2>لوحة التحكم</h2>
-            <small>مساحة عملك</small>
+            <h2 id="dashboardTitle">
+                لوحة التحكم
+            </h2>
+
+            <small id="dashboardSubtitle">
+                مساحة عملك
+            </small>
         </div>
 
-        <div class="status">جاهز</div>
+        <div
+            class="status"
+            id="status"
+        >
+            جاهز
+        </div>
+
     </div>
 
     <div class="tools">
 
         <div class="tool">
-            <strong>إنشاء محتوى</strong>
-            <span>منشورات وإعلانات وأفكار</span>
+            <strong id="tool1Title">إنشاء محتوى</strong>
+            <span id="tool1Text">منشورات وإعلانات وأفكار</span>
         </div>
 
         <div class="tool">
-            <strong>تحليل الحساب</strong>
-            <span>تحليل الأداء والمنافسين</span>
+            <strong id="tool2Title">تحليل الحساب</strong>
+            <span id="tool2Text">تحليل الأداء والمنافسين</span>
         </div>
 
         <div class="tool">
-            <strong>هوية العلامة</strong>
-            <span>ألوان وأسلوب مشروعك</span>
+            <strong id="tool3Title">هوية العلامة</strong>
+            <span id="tool3Text">ألوان وأسلوب مشروعك</span>
         </div>
 
         <div class="tool">
-            <strong>إنشاء صفحة</strong>
-            <span>صفحة تعريف لمشروعك</span>
+            <strong id="tool4Title">إنشاء صفحة</strong>
+            <span id="tool4Text">صفحة تعريف لمشروعك</span>
         </div>
 
     </div>
@@ -530,17 +712,198 @@ footer{
 </section>
 
 <footer>
-    BizAI — أدوات ذكية لنمو مشروعك
+
+    <div class="footer-brand">
+        BizAI
+    </div>
+
+    <div id="copyright">
+        © 2026 BizAI — جميع الحقوق محفوظة.
+    </div>
+
 </footer>
 
 </div>
 
 <script>
-function start(){
-    document.getElementById("dashboard").scrollIntoView({
-        behavior:"smooth"
-    });
+
+const translations = {
+
+    ar:{
+        language:"العربية",
+        navStart:"ابدأ الآن",
+        badge:"مساعد الأعمال الذكي",
+        heroTitle:'ابنِ مشروعك <span class="gradient">بذكاء</span>',
+        heroText:"أدوات ذكية تساعدك على بناء علامتك التجارية، صناعة المحتوى، وتحسين حضورك الرقمي من مكان واحد.",
+        heroButton:"ابدأ مجاناً",
+
+        sectionTitle:"كل أدوات مشروعك",
+        sectionText:"بسيطة، سريعة، ومصممة لتشتغل معك.",
+
+        card1Title:"صناعة المحتوى",
+        card1Text:"أنشئ منشورات وأفكار فيديوهات وإعلانات تناسب مشروعك.",
+
+        card2Title:"تحليل الحساب",
+        card2Text:"اكتشف نقاط القوة والضعف في حضورك على منصات التواصل.",
+
+        card3Title:"هوية العلامة",
+        card3Text:"أنشئ هوية متناسقة من الاسم إلى الألوان والوصف.",
+
+        card4Title:"صفحة مشروع",
+        card4Text:"أنشئ صفحة تعريف احترافية لمشروعك خلال دقائق.",
+
+        card5Title:"خطة محتوى",
+        card5Text:"احصل على خطة نشر منظمة تساعدك على الاستمرار.",
+
+        card6Title:"أفكار تسويقية",
+        card6Text:"اكتشف طرقاً جديدة لجذب العملاء وتنمية مشروعك.",
+
+        dashboardTitle:"لوحة التحكم",
+        dashboardSubtitle:"مساحة عملك",
+        status:"جاهز",
+
+        tool1Title:"إنشاء محتوى",
+        tool1Text:"منشورات وإعلانات وأفكار",
+
+        tool2Title:"تحليل الحساب",
+        tool2Text:"تحليل الأداء والمنافسين",
+
+        tool3Title:"هوية العلامة",
+        tool3Text:"ألوان وأسلوب مشروعك",
+
+        tool4Title:"إنشاء صفحة",
+        tool4Text:"صفحة تعريف لمشروعك",
+
+        copyright:"© 2026 BizAI — جميع الحقوق محفوظة."
+    },
+
+    en:{
+        language:"English",
+        navStart:"Get Started",
+        badge:"Your AI Business Assistant",
+        heroTitle:'Build your business <span class="gradient">smarter</span>',
+        heroText:"Smart tools to build your brand, create content, and improve your digital presence — all in one place.",
+        heroButton:"Start Free",
+
+        sectionTitle:"Everything Your Business Needs",
+        sectionText:"Simple, fast, and designed to work with you.",
+
+        card1Title:"Content Creation",
+        card1Text:"Create posts, video ideas, and ads tailored to your business.",
+
+        card2Title:"Account Analysis",
+        card2Text:"Discover the strengths and weaknesses of your social presence.",
+
+        card3Title:"Brand Identity",
+        card3Text:"Build a consistent identity from your name to your colors and description.",
+
+        card4Title:"Business Page",
+        card4Text:"Create a professional landing page for your business in minutes.",
+
+        card5Title:"Content Plan",
+        card5Text:"Get an organized publishing plan that keeps you consistent.",
+
+        card6Title:"Marketing Ideas",
+        card6Text:"Discover new ways to attract customers and grow your business.",
+
+        dashboardTitle:"Dashboard",
+        dashboardSubtitle:"Your workspace",
+        status:"Ready",
+
+        tool1Title:"Create Content",
+        tool1Text:"Posts, ads and ideas",
+
+        tool2Title:"Account Analysis",
+        tool2Text:"Performance and competitor analysis",
+
+        tool3Title:"Brand Identity",
+        tool3Text:"Your brand colors and style",
+
+        tool4Title:"Create a Page",
+        tool4Text:"A landing page for your business",
+
+        copyright:"© 2026 BizAI — All rights reserved."
+    }
+
+};
+
+function toggleLanguageMenu(){
+
+    document
+        .getElementById("languageMenu")
+        .classList.toggle("show");
+
 }
+
+function setLanguage(lang){
+
+    const t=translations[lang];
+
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+
+    Object.keys(t).forEach(key=>{
+
+        const element=document.getElementById(key);
+
+        if(!element) return;
+
+        if(key==="heroTitle"){
+            element.innerHTML=t[key];
+        }else{
+            element.textContent=t[key];
+        }
+
+    });
+
+    document.getElementById("languageButton").textContent=t.language;
+
+    document.getElementById("arOption").classList.toggle(
+        "active",
+        lang==="ar"
+    );
+
+    document.getElementById("enOption").classList.toggle(
+        "active",
+        lang==="en"
+    );
+
+    document
+        .getElementById("languageMenu")
+        .classList.remove("show");
+
+    localStorage.setItem("bizai-language",lang);
+}
+
+function start(){
+
+    document
+        .getElementById("dashboard")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+document.addEventListener("click",function(e){
+
+    const wrap=document.querySelector(".language-wrap");
+
+    if(!wrap.contains(e.target)){
+
+        document
+            .getElementById("languageMenu")
+            .classList.remove("show");
+
+    }
+
+});
+
+const savedLanguage=
+    localStorage.getItem("bizai-language") || "ar";
+
+setLanguage(savedLanguage);
+
 </script>
 
 </body>
