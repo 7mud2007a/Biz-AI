@@ -1,4 +1,5 @@
-const express = require("express");
+<details>
+<summary>اضغط هون لفتح server.js كامل</summary>const express = require("express");
 const path = require("path");
 
 const app = express();
@@ -7,18 +8,23 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
-const MODELS = [
+const TEXT_MODELS = [
     "gemini-3.6-flash",
     "gemini-3.5-flash",
     "gemini-3.5-flash-lite"
 ];
+
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+
 
 /* =========================
    TEXT GENERATION
 ========================= */
 
 app.post("/api/generate", async (req, res) => {
+
     try {
+
         const { prompt } = req.body;
 
         if (!prompt || !prompt.trim()) {
@@ -27,26 +33,28 @@ app.post("/api/generate", async (req, res) => {
             });
         }
 
-        const apiKey = process.env.GEMINI_API_KEY;
-
-        if (!apiKey) {
+        if (!GEMINI_API_KEY) {
             return res.status(500).json({
                 error: "Gemini API Key غير موجود على Render"
             });
         }
 
-        for (const model of MODELS) {
+        for (const model of TEXT_MODELS) {
+
             try {
-                console.log(`Trying model: ${model}`);
+
+                console.log(`Trying text model: ${model}`);
 
                 const response = await fetch(
                     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
                     {
                         method: "POST",
+
                         headers: {
                             "Content-Type": "application/json",
-                            "x-goog-api-key": apiKey
+                            "x-goog-api-key": GEMINI_API_KEY
                         },
+
                         body: JSON.stringify({
                             contents: [
                                 {
@@ -55,7 +63,7 @@ app.post("/api/generate", async (req, res) => {
                                         {
                                             text: `أنت مساعد تسويق احترافي لمنصة BizAI.
 
-مهمتك إنشاء محتوى احترافي ومفيد بناءً على طلب المستخدم.
+أنشئ محتوى احترافي ومفيد بناءً على طلب المستخدم.
 
 اكتب باللغة المطلوبة.
 لا تستخدم الإيموجي إلا إذا طلب المستخدم ذلك.
@@ -76,6 +84,7 @@ ${prompt}`
                 const data = await response.json();
 
                 if (response.ok) {
+
                     const text =
                         data?.candidates?.[0]?.content?.parts
                             ?.map(part => part.text || "")
@@ -83,23 +92,29 @@ ${prompt}`
                             .trim();
 
                     if (text) {
+
                         return res.json({
                             result: text
                         });
+
                     }
+
                 }
 
                 console.error(
-                    `Model ${model} failed`,
-                    data?.error?.message || ""
+                    `Text model ${model} failed:`,
+                    data?.error?.message || "Unknown error"
                 );
 
             } catch (error) {
+
                 console.error(
-                    `Model ${model} error:`,
+                    `Text model ${model} error:`,
                     error.message
                 );
+
             }
+
         }
 
         return res.status(503).json({
@@ -107,70 +122,151 @@ ${prompt}`
         });
 
     } catch (error) {
-        console.error("Server Error:", error);
 
-        res.status(500).json({
+        console.error("Text server error:", error);
+
+        return res.status(500).json({
             error: "حدث خطأ في السيرفر"
         });
+
     }
+
 });
 
 
 /* =========================
-   IMAGE GENERATION
+   NANO BANANA 2 IMAGE
 ========================= */
 
 app.post("/api/generate-image", async (req, res) => {
+
     try {
+
         const { prompt } = req.body;
 
         if (!prompt || !prompt.trim()) {
+
             return res.status(400).json({
                 error: "اكتب وصف الصورة أولاً"
             });
+
         }
 
-        const apiKey = process.env.POLLINATIONS_API_KEY;
+        if (!GEMINI_API_KEY) {
 
-        if (!apiKey) {
             return res.status(500).json({
-                error: "Pollinations API Key غير موجود على Render"
+                error: "Gemini API Key غير موجود على Render"
             });
+
         }
 
-        const imageUrl =
-            `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}` +
-            `?model=flux&width=1024&height=1024&nologo=true&key=${encodeURIComponent(apiKey)}`;
+        console.log("Generating image with Nano Banana 2...");
 
-        const response = await fetch(imageUrl);
+        const response = await fetch(
+            "https://generativelanguage.googleapis.com/v1beta/interactions",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-goog-api-key": GEMINI_API_KEY
+                },
+
+                body: JSON.stringify({
+
+                    model: "gemini-3.1-flash-image",
+
+                    input: `
+Create exactly the image described below.
+
+USER IMAGE DESCRIPTION:
+${prompt}
+
+Follow the user's description as accurately as possible.
+
+Preserve the requested:
+- main subject
+- objects
+- environment
+- composition
+- colors
+- clothing
+- camera angle
+- lighting
+- visual style
+- atmosphere
+- proportions
+
+Do not replace the requested subject.
+Do not invent a different scene.
+Do not add unrelated objects.
+
+Create a high-quality, realistic and detailed image.
+`,
+
+                    response_format: {
+                        type: "image",
+                        aspect_ratio: "1:1",
+                        image_size: "2K"
+                    }
+
+                })
+
+            }
+        );
+
+        const data = await response.json();
 
         if (!response.ok) {
-            const errorText = await response.text();
 
             console.error(
-                "Pollinations Error:",
-                errorText
+                "Nano Banana error:",
+                data
             );
 
             return res.status(response.status).json({
-                error: "فشل إنشاء الصورة"
+                error:
+                    data?.error?.message ||
+                    "فشل إنشاء الصورة"
             });
+
+        }
+
+        const image =
+            data?.output_image?.data;
+
+        if (!image) {
+
+            console.error(
+                "No image returned:",
+                JSON.stringify(data).slice(0, 3000)
+            );
+
+            return res.status(500).json({
+                error: "Gemini لم يرجع صورة"
+            });
+
         }
 
         res.json({
-            image: imageUrl
+            image: `data:image/jpeg;base64,${image}`
         });
 
     } catch (error) {
+
         console.error(
-            "Image Server Error:",
+            "Image server error:",
             error
         );
 
         res.status(500).json({
-            error: "حدث خطأ أثناء إنشاء الصورة"
+            error:
+                "حدث خطأ أثناء إنشاء الصورة: " +
+                error.message
         });
+
     }
+
 });
 
 
@@ -179,5 +275,11 @@ app.post("/api/generate-image", async (req, res) => {
 ========================= */
 
 app.listen(PORT, "0.0.0.0", () => {
-    console.log(`BizAI running on port ${PORT}`);
+
+    console.log(
+        `BizAI running on port ${PORT}`
+    );
+
 });
+
+</details>
