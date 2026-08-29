@@ -13,6 +13,10 @@ const MODELS = [
     "gemini-3.5-flash-lite"
 ];
 
+/* =========================
+   TEXT GENERATION
+========================= */
+
 app.post("/api/generate", async (req, res) => {
     try {
         const { prompt } = req.body;
@@ -31,24 +35,18 @@ app.post("/api/generate", async (req, res) => {
             });
         }
 
-        let lastError = null;
-
         for (const model of MODELS) {
-
             try {
-
                 console.log(`Trying model: ${model}`);
 
                 const response = await fetch(
                     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
                     {
                         method: "POST",
-
                         headers: {
                             "Content-Type": "application/json",
                             "x-goog-api-key": apiKey
                         },
-
                         body: JSON.stringify({
                             contents: [
                                 {
@@ -78,7 +76,6 @@ ${prompt}`
                 const data = await response.json();
 
                 if (response.ok) {
-
                     const text =
                         data?.candidates?.[0]?.content?.parts
                             ?.map(part => part.text || "")
@@ -86,57 +83,100 @@ ${prompt}`
                             .trim();
 
                     if (text) {
-
-                        console.log(`Success with model: ${model}`);
-
                         return res.json({
                             result: text
                         });
-
                     }
-
-                    lastError = "Gemini لم يرجع أي محتوى";
-
-                } else {
-
-                    lastError =
-                        data?.error?.message ||
-                        `Model ${model} failed`;
-
-                    console.error(
-                        `Model ${model} failed:`,
-                        lastError
-                    );
-
                 }
 
+                console.error(
+                    `Model ${model} failed`,
+                    data?.error?.message || ""
+                );
+
             } catch (error) {
-
-                lastError = error.message;
-
                 console.error(
                     `Model ${model} error:`,
                     error.message
                 );
-
             }
         }
 
         return res.status(503).json({
-            error:
-                "كل نماذج Gemini مشغولة حالياً. جرّب مرة ثانية بعد قليل."
+            error: "كل نماذج Gemini مشغولة حالياً. جرّب مرة ثانية."
         });
 
     } catch (error) {
-
         console.error("Server Error:", error);
 
-        return res.status(500).json({
+        res.status(500).json({
             error: "حدث خطأ في السيرفر"
         });
-
     }
 });
+
+
+/* =========================
+   IMAGE GENERATION
+========================= */
+
+app.post("/api/generate-image", async (req, res) => {
+    try {
+        const { prompt } = req.body;
+
+        if (!prompt || !prompt.trim()) {
+            return res.status(400).json({
+                error: "اكتب وصف الصورة أولاً"
+            });
+        }
+
+        const apiKey = process.env.POLLINATIONS_API_KEY;
+
+        if (!apiKey) {
+            return res.status(500).json({
+                error: "Pollinations API Key غير موجود على Render"
+            });
+        }
+
+        const imageUrl =
+            `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}` +
+            `?model=flux&width=1024&height=1024&nologo=true&key=${encodeURIComponent(apiKey)}`;
+
+        const response = await fetch(imageUrl);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+
+            console.error(
+                "Pollinations Error:",
+                errorText
+            );
+
+            return res.status(response.status).json({
+                error: "فشل إنشاء الصورة"
+            });
+        }
+
+        res.json({
+            image: imageUrl
+        });
+
+    } catch (error) {
+        console.error(
+            "Image Server Error:",
+            error
+        );
+
+        res.status(500).json({
+            error: "حدث خطأ أثناء إنشاء الصورة"
+        });
+    }
+});
+
+
+/* =========================
+   SERVER
+========================= */
 
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`BizAI running on port ${PORT}`);
